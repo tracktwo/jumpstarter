@@ -1,0 +1,182 @@
+<h3>Barracks</h3>
+<div ng-controller="CustomSoldierCtrl as ctrl">
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="col-xs-2">First Name</th>
+            <th class="col-xs-2">Nick Name</th>
+            <th class="col-xs-2">Last Name</th>
+            <th class="col-xs-1">Rank</th>
+            <th class="col-xs-2">Class</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="soldier in ctrl.soldiers" ng-click="ctrl.editSoldier(soldier)"
+            ng-class="{info: ctrl.isSelected(soldier)}">
+            <td ng-class="{'text-muted': soldier.firstName == ''}">{{ctrl.printName(soldier.firstName)}}</td>
+            <td ng-class="{'text-muted': soldier.nickName == ''}">{{ctrl.printName(soldier.nickName)}}</td>
+            <td ng-class="{'text-muted': soldier.lastName == ''}">{{ctrl.printName(soldier.lastName)}}</td>
+            <td>{{soldier.rank}}</td>
+            <td>{{soldier.class}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Soldier Configuration</h3>
+        </div>
+        <div class="panel-body">
+            <div ng-controller="SoldierForm as frm">
+                <form name="soldierForm" class="form form-horizontal" novalidate>
+                    <div class="form-group form-group-sm">
+                        <div class="col-xs-4">
+                            <label class="control-label" for="firstName">First Name:</label>
+                            <input class="form-control" type="text" ng-model="frm.soldier.firstName" id="firstName"
+                                   placeholder="<Random>"/>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label" for="nickname">Nick Name:</label>
+                            <input class="form-control" type="text" ng-model="frm.soldier.nickName" id="nickname"
+                                   placeholder="<Random>"/>
+                        </div>
+                        <div class="col-xs-4">
+                            <label class="control-label" for="lastName">Last Name:</label>
+                            <input class="form-control" type="text" ng-model="frm.soldier.lastName" id="lastName"
+                                   placeholder="<Random>"/>
+                        </div>
+                    </div>
+                    <div class="form-group form-group-sm">
+                        <div class="col-xs-2">
+                            <label class="control-label" for="rank">Rank:</label>
+                            <select class="form-control" id="rank" ng-model="frm.soldier.rank"
+                                    ng-change="frm.rankChanged()">
+                                <option ng-repeat="rank in Ranks">{{rank}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3">
+                            <label class="control-label" for="class">Class:</label>
+                            <select class="form-control" id="class" ng-model="frm.soldier.class"
+                                    ng-disabled="frm.isClassDisabled()" ng-change="frm.classChanged()">
+                                <option ng-repeat="c in Classes">{{c}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <label class="control-label" for="gender">Gender:</label>
+                            <select class="form-control" id="gender" ng-model="frm.soldier.gender">
+                                <option ng-repeat="g in Genders">{{g}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-3">
+                            <label class="control-label" for="country">Country:</label>
+                            <select class="form-control" id="country" ng-model="frm.soldier.country">
+                                <option selected>Unspecified</option>
+                                <option ng-repeat="c in Countries | orderBy">{{c}}</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-2">
+                            <label class="control-label" for="psiRank">Psi Rank:</label>
+                            <select class="form-control" id="psiRank" ng-model="frm.soldier.psiRank">
+                                <option ng-repeat="r in PsiRanks">{{r}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Perks -->
+
+                    <div class="form-group form-group-sm col-xs-12">
+                        <div class="col-xs-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Class Perks</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <perk-box ng-repeat="r in Ranks | limitTo:6:2" rank="{{r}}" label-width="2"
+                                              ng-model="frm.soldier.classPerks[Ranks.indexOf(r)-2]"
+                                              is-disabled="frm.isPerkDisabled(r)">
+                                        <option></option>
+                                        <option ng-repeat="opt in ClassPerks[frm.soldier.class][r]">
+                                            {{getPerkName(opt)}}
+                                        </option>
+                                    </perk-box>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Psi Perks</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <perk-box ng-repeat="r in PsiRanks | limitTo:6:1" rank="{{r}}" label-width="3"
+                                              ng-model="frm.soldier.psiPerks[PsiRanks.indexOf(r)-1]"
+                                              is-disabled="frm.isPsiPerkDisabled(r)">
+                                        <option></option>
+                                        <option ng-repeat="opt in PsiPerks[r]">{{getPerkName(opt)}}</option>
+                                    </perk-box>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Perks -->
+
+                    <div class="form-group form-group-sm">
+                        <div class="col-xs-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Additional Perks</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="col-xs-12">
+                                        <li class="list-unstyled" ng-repeat="p in frm.soldier.extraPerks">
+                                            <a href="" ng-click="frm.removeExtraPerk($index)">
+                                                <span class="glyphicon glyphicon-remove"></span></a>
+                                            {{p}}
+                                        </li>
+                                    </ul>
+                                    <div class="form-inline">
+                                        <div class="form-group form-group-sm">
+                                            <div class="col-xs-9">
+                                                <select id="perkbox" class="form-control" ng-model="frm.extraPerkStr">
+                                                    <option ng-repeat="p in Perks | orderBy: 'name'">{{p.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-3">
+                                                <button type="button" class="btn btn-default form-control"
+                                                        ng-click="frm.addExtraPerk()" ng-disabled="frm.isExtraPerkInvalid()">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-xs-12">
+                        <div class="col-xs-3">
+                            <button type="button" class="btn btn-primary form-control"
+                                    ng-click="frm.submitSoldier(ctrl)">
+
+                                <span ng-class="{glyphicon: true, 'glyphicon-pencil': frm.isEditing(), 'glyphicon-plus': !frm.isEditing()}"></span>
+                                {{frm.submitLabel()}}
+                            </button>
+                        </div>
+                        <div class="col-xs-3" ng-show="frm.isEditing()">
+                            <button type="button" class="btn btn-default form-control"
+                                    ng-click="ctrl.editSoldier(null)">
+
+                                <span class="glyphicon glyphicon-remove"></span>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

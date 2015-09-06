@@ -1,0 +1,8 @@
+{
+  "Awakened": [ "ePerk_MindFray", "ePerk_GeneMod_BrainFeedback", "ePerk_GeneMod_RegenPheromones" ],
+  "Sensitive": [ "ePerk_PsiInspiration", "ePerk_DistortionField" ],
+  "Talent": ["ePerk_MindMerge", "ePerk_PsiPanic" ],
+  "Adept":  ["ePerk_TelekineticField", "ePerk_RifleSuppression_DEPRECATED", "ePerk_Foundry_SHIVSuppression" ],
+  "Psion": ["ePerk_MindControl"],
+  "Master": ["ePerk_Rift"]
+}

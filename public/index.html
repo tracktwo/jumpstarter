@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="jumpstarter">
+<head>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.13.3/ui-bootstrap-tpls.min.js"></script>
+
+    <script src="js/jumpstarter.js"></script>
+    <script src="js/tabs.js"></script>
+    <script src="js/barracks.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container" ng-controller="JumpStarterCtrl as ctrl">
+<h1>JumpStarter .ini Generator</h1>
+<tabs>
+    <pane title="Basics">
+        <div ng-include="'basic-panel.html'"></div>
+    </pane>
+    <pane title="Barracks">
+        <div ng-include="'barracks-panel.html'"></div>
+    </pane>
+    <!--<pane title="Research & Development">-->
+        <!--Research goes here-->
+    <!--</pane>-->
+    <!--<pane title="Facilities">-->
+        <!--Facilities-->
+    <!--</pane>-->
+    <!--<pane title="Items">-->
+        <!--Item storage-->
+    <!--</pane>-->
+</tabs>
+</div>
+</body>
+</html>

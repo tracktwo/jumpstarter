@@ -1,0 +1,74 @@
+{
+  "Sniper" : {
+    "LCPL": ["ePerk_Medal_CouncilB", "ePerk_Foundry_MedikitII", "ePerk_LowProfile" ],
+    "CPL":  ["ePerk_SnapShot", "ePerk_PrecisionShot", "ePerk_DisablingShot" ],
+    "SGT":  ["ePerk_Medal_UrbanB", "ePerk_Gunslinger", "ePerk_DamnGoodGround" ],
+    "TSGT": ["ePerk_PlatformStability", "ePerk_XenobiologyOverlays","ePerk_Executioner" ],
+    "GSGT": ["ePerk_Disabled_DEPRECATED", "ePerk_BringEmOn", "ePerk_TacticalSense" ],
+    "MSGT": ["ePerk_DoubleTap", "ePerk_Mayhem", "ePerk_InTheZone" ]
+  },
+
+  "Scout": {
+    "LCPL": [ "ePerk_Medal_CouncilB", "ePerk_DamnGoodGround", "ePerk_TracerBeams" ],
+    "CPL": [ "ePerk_Foundry_MedikitII", "ePerk_Gunslinger", "ePerk_LowProfile" ],
+    "SGT": [ "ePerk_BattleScanner", "ePerk_Aggression", "ePerk_Flush" ],
+    "TSGT": [ "ePerk_ReinforcedArmor", "ePerk_InTheZone", "ePerk_GeneMod_MimeticSkin" ],
+    "GSGT": [ "ePerk_Sprinter", "ePerk_BringEmOn", "ePerk_TacticalSense" ],
+    "MSGT": [ "ePerk_SmokeAndMirrors", "ePerk_XenobiologyOverlays", "ePerk_ExtraConditioning" ]
+  },
+
+  "Rocketeer": {
+    "LCPL": [ "ePerk_Poisoned", "ePerk_Gunslinger", "ePerk_WillToSurvive" ],
+    "CPL": [ "ePerk_SnapShot", "ePerk_Foundry_AdvancedFlight", "ePerk_RapidReaction" ],
+    "SGT": [ "ePerk_ShredderRocket", "ePerk_PlatformStability", "ePerk_FocusedSuppression" ],
+    "TSGT": [ "ePerk_Mayhem", "ePerk_Opportunist", "ePerk_TacticalSense" ],
+    "GSGT": [ "ePerk_Rocketeer", "ePerk_DoubleTap", "ePerk_ExtraConditioning" ],
+    "MSGT": [ "ePerk_DangerZone", "ePerk_Implanted", "ePerk_Foundry_PistolIII" ]
+  },
+
+  "Gunner": {
+    "LCPL":[ "ePerk_TracerBeams", "ePerk_CoveringFire", "ePerk_Flush" ],
+    "CPL": [ "ePerk_ShredderRocket", "ePerk_Opportunist", "ePerk_HEATAmmo" ],
+    "SGT": [ "ePerk_Gunslinger", "ePerk_Executioner", "ePerk_WillToSurvive" ],
+    "TSGT": [ "ePerk_DoubleTap", "ePerk_BulletSwarm", "ePerk_RapidFire" ],
+    "GSGT": [ "ePerk_DangerZone", "ePerk_PlatformStability", "ePerk_Resilience" ],
+    "MSGT": [ "ePerk_Mayhem", "ePerk_Sentinel", "ePerk_ExtraConditioning" ]
+  },
+
+  "Medic": {
+    "LCPL":[ "ePerk_CovertPockets", "ePerk_Medal_DefenderA", "ePerk_FocusedSuppression" ],
+    "CPL": [ "ePerk_Revive", "ePerk_SmokeAndMirrors", "ePerk_RapidReaction" ],
+    "SGT": [ "ePerk_Dazed", "ePerk_SmokeBomb", "ePerk_BulletSwarm" ],
+    "TSGT": [ "ePerk_CombatDrugs", "ePerk_DenseSmoke", "ePerk_Opportunist" ],
+    "GSGT": [ "ePerk_Sprinter", "ePerk_Bombard", "ePerk_Disabled_DEPRECATED" ],
+    "MSGT": [ "ePerk_Savior", "ePerk_DeepPockets", "ePerk_ExtraConditioning" ]
+  },
+
+  "Engineer": {
+    "LCPL":[ "ePerk_ImmuneToDisable_DEPRECATED", "ePerk_SmokeBomb", "ePerk_TracerBeams" ],
+    "CPL": [ "ePerk_Poisoned", "ePerk_SmokeAndMirrors", "ePerk_Gunslinger" ],
+    "SGT": [ "ePerk_FocusedSuppression", "ePerk_Repair", "ePerk_WillToSurvive" ],
+    "TSGT": [ "ePerk_Mayhem", "ePerk_DenseSmoke", "ePerk_BattleScanner" ],
+    "GSGT": [ "ePerk_HEATAmmo", "ePerk_DeepPockets", "ePerk_ExtraConditioning" ],
+    "MSGT": [ "ePerk_Bombard", "ePerk_FireRocket", "ePerk_Foundry_PistolIII" ]
+  },
+
+  "Assault": {
+    "LCPL":[ "ePerk_Flush", "ePerk_CloseCombatSpecialist", "ePerk_Medal_DefenderA" ],
+    "CPL": [ "ePerk_Gunslinger", "ePerk_Aggression", "ePerk_WillToSurvive" ],
+    "SGT": [ "ePerk_ReinforcedArmor", "ePerk_RapidFire", "ePerk_CloseAndPersonal" ],
+    "TSGT": [ "ePerk_Executioner", "ePerk_KillerInstinct", "ePerk_Resilience" ],
+    "GSGT": [ "ePerk_Sprinter", "ePerk_BringEmOn", "ePerk_TacticalSense" ],
+    "MSGT": [ "ePerk_LightningReflexes", "ePerk_XenobiologyOverlays", "ePerk_ExtraConditioning" ]
+  },
+
+  "Infantry": {
+    "LCPL":[ "ePerk_Executioner", "ePerk_CoveringFire", "ePerk_Medal_DefenderA" ],
+    "CPL": [ "ePerk_Aggression", "ePerk_Opportunist", "ePerk_WillToSurvive" ],
+    "SGT": [ "ePerk_Gunslinger", "ePerk_FocusedSuppression", "ePerk_Foundry_MedikitII" ],
+    "TSGT": [ "ePerk_Medal_UrbanB", "ePerk_Disabled_DEPRECATED", "ePerk_TacticalSense" ],
+    "GSGT": [ "ePerk_BringEmOn", "ePerk_Sentinel", "ePerk_Resilience" ],
+    "MSGT": [ "ePerk_RapidFire", "ePerk_XenobiologyOverlays", "ePerk_ExtraConditioning" ]
+  }
+}
+
