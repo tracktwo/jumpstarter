@@ -73,12 +73,12 @@
 
             <div class="col-xs-4">
                 <div class="col-xs-12">
-                <label class="checkbox-inline">
-                    <input type="checkbox" ng-model="frm.soldier.bonusattrib" id="bonusattrib">
+                <label class="checkbox-inline" title="If checked, attribute values here are added to the default values. If unchecked, attribute values here are absolute values">
+                    <input type="checkbox" ng-model="frm.soldier.bonusattrib" id="bonusattrib" >
                     Attributes are bonuses</label>
                 </div>
                 <div class="col-xs-12">
-                <a href="" ng-click="frm.resetAttributes()">Reset attribute bonuses</a>
+                <a href="" ng-click="frm.resetAttributes()" title="Reset attributes to the bonuses given by selected perks">Reset attribute bonuses</a>
                 </div>
             </div>
 
