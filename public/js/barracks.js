@@ -58,6 +58,11 @@
             this.soldier.classPerks = ["", "", "", "", "", "" ];
             this.soldier.psiPerks = ["", "", "", "", "", "" ];
             this.soldier.extraPerks = [];
+            this.soldier.hp = 0;
+            this.soldier.aim = 0;
+            this.soldier.will = 0;
+            this.soldier.mob = 0;
+            this.soldier.bonusattrib = true;
         };
 
         this.resetSoldier();
@@ -141,6 +146,14 @@
         this.isExtraPerkInvalid = function() {
             return this.extraPerkStr == "" ||
                 this.soldier.extraPerks.indexOf(this.extraPerkStr) != -1;
+        }
+
+        this.resetAttributes = function() {
+            this.soldier.hp = 0;
+            this.soldier.aim = 0;
+            this.soldier.mob = 0;
+            this.soldier.will = 0;
+            this.soldier.bonusattrib = true;
         }
     }]);
 
