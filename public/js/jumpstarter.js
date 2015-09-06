@@ -52,7 +52,7 @@
         };
 
         $http.get("data/countries.json").then( function (response) {
-            $scope.Countries = response.data.Countries;
+            $scope.Countries = response.data;
         });
 
         $http.get("data/class-perks.json").then(function (response) {
