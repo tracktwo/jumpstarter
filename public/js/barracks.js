@@ -2,7 +2,6 @@
     var app = angular.module('barracks', []);
 
     app.controller('CustomSoldierCtrl', ['$scope', function($scope) {
-        $scope.ini.soldiers = [];
         this.curSoldier = null;
 
         this.editSoldier = function(soldier) {

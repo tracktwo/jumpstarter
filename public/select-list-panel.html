@@ -13,9 +13,8 @@
     <div class="form-inline">
       <div class="form-group form-group-sm">
         <div class="col-xs-9">
-          <select id="perkbox" class="form-control" ng-model="currentItem">
-            <option ng-repeat="p in opts | orderBy:order">{{p.name}}
-            </option>
+          <select class="form-control" ng-model="currentItem">
+            <option ng-repeat="p in opts | orderBy:order | filter:removePresent">{{p.name}}</option>
           </select>
         </div>
         <div class="col-xs-3">

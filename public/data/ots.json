@@ -1,0 +1,9 @@
+[
+  { "enum": "eOTS_SquadSize_I", "name": "Squad Size I" },
+  { "enum": "eOTS_SquadSize_II", "name": "Squad Size II" },
+  { "enum": "eOTS_XP_II", "name": "Tactical Officers" },
+  { "enum": "eOTS_HP_I", "name": "Company Officers" },
+  { "enum": "eOTS_Leader", "name": "Field Officers" },
+  { "enum": "eOTS_XP_I", "name": "Regimental Officers" },
+  { "enum": "eOTS_Will_I", "name": "Commanding Officer" }
+]

@@ -134,7 +134,17 @@
       $scope.Foundry = response.data;
     });
 
-    $scope.ini = {};
+    $http.get("data/ots.json").then(function (response) {
+      $scope.OTS = response.data;
+    });
+
+    $scope.ini = {
+      soldiers: [],
+      research: [],
+      foundry: [],
+      ots: []
+    };
+
   }]);
 
   // Workaround for triggering change events on keyboard use with select elements.
@@ -160,23 +170,27 @@
       scope: {
         title: "@",
         list: "=",
-        ngModel: "=",
         opts: "=",
         order: "@"
       },
-      link: function(scope, element, attrs) {
-        scope.currentItem = "";
+      link: function($scope, element, attrs) {
+        $scope.currentItem = "";
 
-        scope.addItem = function(item) {
-          scope.list.push(item);
-        }
+        $scope.addItem = function(item) {
+          $scope.list.push(item);
+          $scope.currentItem = "";
+        };
 
-        scope.removeItem = function(idx) {
-          scope.list.splice(idx, 1);
-        }
+        $scope.removeItem = function(idx) {
+          $scope.list.splice(idx, 1);
+        };
 
-        scope.isItemInvalid = function(item) {
-          return item == "" || scope.list.indexOf(item) != -1;
+        $scope.isItemInvalid = function(item) {
+          return item == "" || $scope.list.indexOf(item) != -1;
+        };
+
+        $scope.removePresent = function(value) {
+          return $scope.list.indexOf(value.name) == -1;
         }
       },
       templateUrl: 'select-list-panel.html'
