@@ -146,6 +146,26 @@
     }
   });
 
+  app.directive('selectListPanel', function() {
+    return {
+      restrict: "E",
+      scope: {
+        title: "@",
+        list: "=",
+        deleteFn: "&",
+        addFn: "&",
+        disabledFn: "&",
+        ngModel: "=",
+        opts: "=",
+        order: "@"
+      },
+      link: function(scope, element, attrs) {
+        scope.currentItem = "";
+      },
+      templateUrl: 'select-list-panel.html'
+    }
+  });
+
 })();
 
 

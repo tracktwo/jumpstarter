@@ -42,7 +42,6 @@
 
         this.soldier = {};
         this.curSoldier = null;
-        this.extraPerkStr = '';
 
         var frm = this;
 
@@ -133,9 +132,8 @@
                 ($scope.PsiRanks.indexOf(this.soldier.psiRank) < $scope.PsiRanks.indexOf(rank));
         };
 
-        this.addExtraPerk = function() {
-            this.soldier.extraPerks.push(this.extraPerkStr);
-            this.extraPerkStr = '';
+        this.addExtraPerk = function(prk) {
+            this.soldier.extraPerks.push(prk);
         };
 
         this.removeExtraPerk = function(idx) {
@@ -143,9 +141,9 @@
             this.soldier.extraPerks.splice(idx, 1);
         };
 
-        this.isExtraPerkInvalid = function() {
-            return this.extraPerkStr == "" ||
-                this.soldier.extraPerks.indexOf(this.extraPerkStr) != -1;
+        this.isExtraPerkInvalid = function(prk) {
+            return prk == "" ||
+                this.soldier.extraPerks.indexOf(prk) != -1;
         };
 
         this.resetAttributes = function() {

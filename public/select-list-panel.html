@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">{{title}}</h4>
+  </div>
+  <div class="panel-body">
+    <ul class="col-xs-12">
+      <li class="list-unstyled" ng-repeat="p in list">
+        <a href="" ng-click="deleteFn({idx:$index})">
+          <span class="glyphicon glyphicon-remove"></span></a>
+        {{p}}
+      </li>
+    </ul>
+    <div class="form-inline">
+      <div class="form-group form-group-sm">
+        <div class="col-xs-9">
+          <select id="perkbox" class="form-control" ng-model="currentItem">
+            <option ng-repeat="p in opts | orderBy:order">{{p.name}}
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-3">
+          <button type="button" class="btn btn-default form-control"
+                  ng-click="addFn({item:currentItem})" ng-disabled="disabledFn({item:currentItem})">
+            <span class="glyphicon glyphicon-plus"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
