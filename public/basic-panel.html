@@ -1,76 +1,75 @@
+<h3>Basic Setup</h3><br>
 
-    <h3>Basic Setup</h3><br>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Start Date & Timing</h3>
+  </div>
+  <div class="panel-body">
+    <form class="form form-horizontal">
+      <div class="row">
+        <div class="col-xs-6">
+          <label class="control-label" for="startDate">Start Date:</label>
+          <input class="form-control" type="date" ng-model="startDate" placeholder="2016-03-01" id="startDate"/>
+        </div>
+        <div class="col-xs-6">
+          <label class="control-label" for="slingshot_delay">Slingshot delay (days):</label>
+          <input class="form-control" type="number" ng-model="slingshot_delay" min="0" id="slingshot_delay"/>
+        </div>
+        <div class="col-xs-6">
+          <label class="control-label" for="exalt_clues">Exalt clues recovered:</label>
+          <input class="form-control" type="number" ng-model="exalt_clues" min="0" id="exalt_clues"/>
+        </div>
+        <div class="col-xs-6">
+          <label class="control-label" for="alien_research">Alien Bonus Research:</label>
+          <input class="form-control" type="number" ng-model="alien_research" id="alien_research"/>
+        </div>
+        <div class="col-xs-6">
+          <label class="control-label" for="alien_resources">Alien Resources:</label>
+          <input class="form-control" type="number" ng-model="alien_resources" min="0" max="300" id="alien_resources"/>
+        </div>
+        <div class="col-xs-6">
+          <label class="control-label" for="xcom_threat">XCOM Threat:</label>
+          <input class="form-control" type="number" ng-model="xcom_threat" min="0" max="5" id="xcom_threat"/>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Start Date & Timing</h3>
-        </div>
-        <div class="panel-body">
-            <form class="form form-horizontal">
-            <div class="row">
-                <div class="col-xs-6">
-                    <label class="control-label" for="startDate">Start Date:</label>
-                    <input class="form-control" type="date" ng-model="startDate" placeholder="2016-03-01" id="startDate"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="slingshot_delay">Slingshot delay (days):</label>
-                    <input class="form-control" type="number" ng-model="slingshot_delay" min="0" id="slingshot_delay"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="exalt_clues">Exalt clues recovered:</label>
-                    <input class="form-control" type="number" ng-model="exalt_clues" min="0" id="exalt_clues"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="alien_research">Alien Bonus Research:</label>
-                    <input class="form-control" type="number" ng-model="alien_research" id="alien_research"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="alien_resources">Alien Resources:</label>
-                    <input class="form-control" type="number" ng-model="alien_resources" min="0" max="300" id="alien_resources"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="xcom_threat">XCOM Threat:</label>
-                    <input class="form-control" type="number" ng-model="xcom_threat" min="0" max="5" id="xcom_threat"/>
-                </div>
-            </div>
-            </form>
-        </div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Resources</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-xs-6">
+        <label class="control-label" for="credits">Credits:</label>
+        <input class="form-control" type="number" ng-model="credits" id="credits" min="0"/>
+      </div>
+      <div class="col-xs-6">
+        <label class="control-label" for="fragments">Fragments:</label>
+        <input class="form-control" type="number" ng-model="fragments" id="fragments" min="0"/>
+      </div>
+      <div class="col-xs-6">
+        <label class="control-label" for="alloys">Alloys:</label>
+        <input class="form-control" type="number" ng-model="alloys" id="alloys" min="0"/>
+      </div>
+      <div class="col-xs-6">
+        <label class="control-label" for="elerium">Elerium:</label>
+        <input class="form-control" type="number" ng-model="elerium" min="0" id="elerium"/>
+      </div>
+      <div class="col-xs-6">
+        <label class="control-label" for="scientists">Scientists:</label>
+        <input class="form-control" type="number" ng-model="scientists" min="0" id="scientists"/>
+      </div>
+      <div class="col-xs-6">
+        <label class="control-label" for="engineers">Engineers:</label>
+        <input class="form-control" type="number" ng-model="engineers" min="0" id="engineers"/>
+      </div>
+      <div class="col-xs-6">
+        <label class="control-label" for="meld">Meld:</label>
+        <input class="form-control" type="number" ng-model="meld" min="0" id="meld"/>
+      </div>
     </div>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Resources</h3>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-xs-6">
-                    <label class="control-label" for="credits">Credits:</label>
-                    <input class="form-control" type="number" ng-model="credits" id="credits" min="0"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="fragments">Fragments:</label>
-                    <input class="form-control" type="number" ng-model="fragments" id="fragments" min="0"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="alloys">Alloys:</label>
-                    <input class="form-control" type="number" ng-model="alloys" id="alloys" min="0"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="elerium">Elerium:</label>
-                    <input class="form-control" type="number" ng-model="elerium" min="0" id="elerium"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="scientists">Scientists:</label>
-                    <input class="form-control" type="number" ng-model="scientists" min="0" id="scientists"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="engineers">Engineers:</label>
-                    <input class="form-control" type="number" ng-model="engineers" min="0" id="engineers"/>
-                </div>
-                <div class="col-xs-6">
-                    <label class="control-label" for="meld">Meld:</label>
-                    <input class="form-control" type="number" ng-model="meld" min="0" id="meld"/>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
+</div>

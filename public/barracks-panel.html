@@ -11,7 +11,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="soldier in ctrl.soldiers" ng-click="ctrl.editSoldier(soldier)"
+        <tr ng-repeat="soldier in ini.soldiers" ng-click="ctrl.editSoldier(soldier)"
             ng-class="{info: ctrl.isSelected(soldier)}">
             <td ng-class="{'text-muted': soldier.firstName == ''}">{{ctrl.printName(soldier.firstName)}}</td>
             <td ng-class="{'text-muted': soldier.nickName == ''}">{{ctrl.printName(soldier.nickName)}}</td>

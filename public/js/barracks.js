@@ -2,7 +2,7 @@
     var app = angular.module('barracks', []);
 
     app.controller('CustomSoldierCtrl', ['$scope', function($scope) {
-        this.soldiers = [];
+        $scope.ini.soldiers = [];
         this.curSoldier = null;
 
         this.editSoldier = function(soldier) {
@@ -20,7 +20,7 @@
         };
 
         this.addSoldier = function(soldier) {
-            this.soldiers.push(angular.copy(soldier));
+            $scope.ini.soldiers.push(angular.copy(soldier));
         };
 
         this.saveChanges = function(soldier) {
@@ -141,12 +141,12 @@
         this.removeExtraPerk = function(idx) {
            // var idx = this.soldier.extraPerks.indexOf(perk);
             this.soldier.extraPerks.splice(idx, 1);
-        }
+        };
 
         this.isExtraPerkInvalid = function() {
             return this.extraPerkStr == "" ||
                 this.soldier.extraPerks.indexOf(this.extraPerkStr) != -1;
-        }
+        };
 
         this.resetAttributes = function() {
             this.soldier.hp = 0;
@@ -154,7 +154,7 @@
             this.soldier.mob = 0;
             this.soldier.will = 0;
             this.soldier.bonusattrib = true;
-        }
+        };
     }]);
 
     app.directive('perkBox', function() {

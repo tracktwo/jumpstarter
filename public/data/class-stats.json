@@ -1,0 +1,57 @@
+{
+  "Sniper": [
+    { "Perk": "ePerk_Mayhem", "Aim": 2 },
+    { "Perk": "ePerk_DamnGoodGround", "Will": 2 }
+  ],
+
+  "Scout": [
+    { "Perk": "ePerk_LightningReflexes", "Mobility": 2 },
+    { "Perk": "ePerk_Foundry_MedikitII", "Aim": 1 },
+    { "Perk": "ePerk_Gunslinger", "Aim": 1 },
+    { "Perk": "ePerk_ExtraConditioning", "Mobility": 1, "Aim": 4, "Will": 4 }
+  ],
+
+  "Rocketeer": [
+    { "Perk": "ePerk_WillToSurvive", "Will": 3 },
+    { "Perk": "ePerk_RapidReaction", "Aim": 2 },
+    { "Perk": "ePerk_ExtraConditioning", "Mobility": 1, "Aim": 3, "Will": 3 }
+  ],
+
+  "Gunner": [
+    { "Perk": "ePerk_CoveringFire", "Aim": 2 },
+    { "Perk": "ePerk_BulletSwarm", "Aim": 2 },
+    { "Perk": "ePerk_WillToSurvive", "Will": 3 },
+    { "Perk": "ePerk_ExtraConditioning", "Mobility": 1, "Aim": 4, "Will": 4 }
+  ],
+
+  "Medic": [
+    { "Perk": "ePerk_FieldMedic", "Mobility": 1 },
+    { "Perk": "ePerk_Revive", "Will": 2 },
+    { "Perk": "ePerk_Medal_DefenderA", "Will": 5 },
+    { "Perk": "ePerk_RapidReaction", "Aim": 3 },
+    { "Perk": "ePerk_BulletSwarm", "Will": 3 },
+    { "Perk": "ePerk_ExtraConditioning", "Mobility": 1, "Aim": 4, "Will": 4 }
+  ],
+
+  "Engineer": [
+    { "Perk": "ePerk_TracerBeams", "Aim": 1 },
+    { "Perk": "ePerk_Gunslinger", "Aim": 2 },
+    { "Perk": "ePerk_WillToSurvive", "Will": 3 },
+    { "Perk": "ePerk_ExtraConditioning", "Mobility": 1, "Aim": 3, "Will": 3 }
+  ],
+
+  "Assault": [
+    { "Perk": "ePerk_Executioner", "Aim": 2, "Will": 2 },
+    { "Perk": "ePerk_Medal_DefenderA", "Will": 5},
+    { "Perk": "ePerk_WillToSurvive", "Will": 3 },
+    { "Perk": "ePerk_CloseAndPersonal", "Will": 3 },
+    { "Perk": "ePerk_ExtraConditioning", "Mobility": 1, "Aim": 4, "Will": 4 }
+  ],
+
+  "Infantry": [
+    { "Perk": "ePerk_Medal_UrbanB", "Aim": 2 },
+    { "Perk": "ePerk_Medal_DefenderA", "Will": 5 },
+    { "Perk": "ePerk_WillToSurvive", "Will": 3 },
+    { "Perk": "ePerk_ExtraConditioning", "Mobility": 1, "Aim": 4, "Will": 4 }
+  ]
+}
