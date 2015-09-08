@@ -130,6 +130,10 @@
       $scope.Research = response.data;
     });
 
+    $http.get("data/foundry.json").then(function (response) {
+      $scope.Foundry = response.data;
+    });
+
     $scope.ini = {};
   }]);
 
@@ -156,15 +160,24 @@
       scope: {
         title: "@",
         list: "=",
-        deleteFn: "&",
-        addFn: "&",
-        disabledFn: "&",
         ngModel: "=",
         opts: "=",
         order: "@"
       },
       link: function(scope, element, attrs) {
         scope.currentItem = "";
+
+        scope.addItem = function(item) {
+          scope.list.push(item);
+        }
+
+        scope.removeItem = function(idx) {
+          scope.list.splice(idx, 1);
+        }
+
+        scope.isItemInvalid = function(item) {
+          return item == "" || scope.list.indexOf(item) != -1;
+        }
       },
       templateUrl: 'select-list-panel.html'
     }

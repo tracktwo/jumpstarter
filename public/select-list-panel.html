@@ -5,7 +5,7 @@
   <div class="panel-body">
     <ul class="col-xs-12">
       <li class="list-unstyled" ng-repeat="p in list">
-        <a href="" ng-click="deleteFn({idx:$index})">
+        <a href="" ng-click="removeItem($index)">
           <span class="glyphicon glyphicon-remove"></span></a>
         {{p}}
       </li>
@@ -20,7 +20,7 @@
         </div>
         <div class="col-xs-3">
           <button type="button" class="btn btn-default form-control"
-                  ng-click="addFn({item:currentItem})" ng-disabled="disabledFn({item:currentItem})">
+                  ng-click="addItem(currentItem)" ng-disabled="isItemInvalid(currentItem)">
             <span class="glyphicon glyphicon-plus"></span>
           </button>
         </div>

@@ -111,7 +111,7 @@
                 angular.copy(s, frm.soldier);
             }
             frm.curSoldier = s;
-            $scope.rankChanged();
+            frm.rankChanged();
         });
 
         this.isEditing = function() {
