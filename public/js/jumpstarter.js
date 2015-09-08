@@ -1,5 +1,5 @@
 (function () {
-  var app = angular.module('jumpstarter', ['ui.bootstrap', 'tabs', 'barracks']);
+  var app = angular.module('jumpstarter', ['ui.bootstrap', 'tabs', 'barracks', 'research']);
 
   // Services
   app.factory('auth', ['$http', '$window', function ($http, $window) {
@@ -124,6 +124,10 @@
 
     $http.get("data/class-stats.json").then(function (response) {
       $scope.ClassStats = response.data;
+    });
+
+    $http.get("data/research.json").then(function (response) {
+      $scope.Research = response.data;
     });
 
     $scope.ini = {};
