@@ -3,7 +3,7 @@ var JumpStartSchema = new mongoose.Schema({
   title: { type: String, default: "" },
   author: { type: String, default: "" },
   startDate: { type: String, default: "" },
-  exaltClues: { type: Number, default: 0 },
+  exaltClues: { type: Number, default: -1 },
   alienResources: { type: Number, default: -1 },
   alienResearch: { type: Number, default: -1 },
   xcomThreat: { type: Number, default: -1 },

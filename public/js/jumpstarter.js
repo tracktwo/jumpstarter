@@ -1,5 +1,5 @@
 (function () {
-  var app = angular.module('jumpstarter', ['ui.bootstrap', 'tabs', 'barracks', 'research']);
+  var app = angular.module('jumpstarter', ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research']);
 
   // Services
   app.factory('auth', ['$http', '$window', function ($http, $window) {
@@ -142,7 +142,18 @@
       title: "",
       author: "",
       startDate: "",
-      exaltClues: 0,
+      exaltClues: -1,
+      slingshotDelay: -1,
+      alienResearch: -1,
+      alienResources: -1,
+      xcomThreat: -1,
+      credits: -1,
+      fragments: -1,
+      alloys: -1,
+      elerium: -1,
+      scientists: -1,
+      engineers: -1,
+      meld: -1,
 
       soldiers: [],
       research: [],
