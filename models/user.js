@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var jwt = require('jsonwebtoken');
+var fs = require('fs');
 
 
 var UserSchema = new mongoose.Schema({
@@ -24,7 +25,7 @@ UserSchema.methods.generateJWT = function() {
   var exp = new Date(today);
   exp.setDate(today.getDate() + 60);
 
-  var key = fs.readFileSync('private.key');
+  var key = fs.readFileSync('secret.dat');
   return jwt.sign({
     _id: this._id,
     username: this.username,

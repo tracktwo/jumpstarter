@@ -3,12 +3,13 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var passport = require('passport');
 var jwt = require('express-jwt');
+var fs = require('fs');
 
 var User = mongoose.model('User');
 var JumpStart = mongoose.model('JumpStart');
 
 // Auth
-var key = fs.readFileSync('private.key');
+var key = fs.readFileSync('secret.dat');
 var auth = jwt({secret: key, userProperty: 'payload'});
 
 

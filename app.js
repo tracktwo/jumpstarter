@@ -7,7 +7,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+// mongoose
+require ('./models/jumpstart');
+require ('./models/user');
+
+// passport
+require ('./config/passport');
+
 var routes = require('./routes/index');
+var buildini = require('./routes/buildini');
 var users = require('./routes/users');
 
 
@@ -24,9 +32,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/buildini', buildini);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -59,12 +69,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-// mongoose
-require ('./models/jumpstart');
-require ('./models/user');
-
-require ('/config/passport');
-app.use(passport.initialize());
 mongoose.connect('mongodb://localhost/jumpstarter');
 
 module.exports = app;

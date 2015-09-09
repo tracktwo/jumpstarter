@@ -20,6 +20,7 @@
 <body>
 <div class="container" ng-controller="JumpStarterCtrl as ctrl">
 <h1>JumpStarter .INI Generator</h1>
+  <a class="btn btn-primary" ng-click="ctrl.buildIni()">Download .INI</a>
 <tabs>
     <pane title="Basics">
         <div ng-include="'basic-panel.html'"></div>
@@ -29,7 +30,6 @@
     </pane>
     <pane title="Research & Development">
       <div ng-include="'research.html'"></div>
-        <!--Research goes here-->
     </pane>
     <!--<pane title="Facilities">-->
         <!--Facilities-->

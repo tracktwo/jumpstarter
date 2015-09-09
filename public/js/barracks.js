@@ -52,7 +52,7 @@
             this.soldier.class = $scope.Classes[0];
             this.soldier.gender = $scope.Genders[0];
             this.soldier.psiRank = $scope.PsiRanks[0];
-            this.soldier.country = "Unspecified";
+            this.soldier.country = "";
             this.soldier.classPerks = ["", "", "", "", "", "" ];
             this.soldier.psiPerks = ["", "", "", "", "", "" ];
             this.soldier.extraPerks = [];

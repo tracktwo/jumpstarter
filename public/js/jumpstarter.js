@@ -139,11 +139,31 @@
     });
 
     $scope.ini = {
+      title: "",
+      author: "",
+      startDate: "",
+      exaltClues: 0,
+
       soldiers: [],
       research: [],
       foundry: [],
       ots: []
     };
+
+    this.buildIni = function() {
+     $http.post("/buildini", $scope.ini).then(function (response) {
+       var blob = new Blob([response.data], {type: "text/plain"});
+       var url = window.URL || window.webkitURL;
+       var link = document.createElementNS("http://www.w3.org/1999/xhtml", "a");
+       var event = document.createEvent("MouseEvents");
+
+       link.href=  url.createObjectURL(blob);
+       link.download = "DefaultJumpStart.ini";
+       event.initEvent('click', true, false);
+       link.dispatchEvent(event);
+      });
+    }
+
 
   }]);
 
