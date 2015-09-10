@@ -93,11 +93,9 @@
           <div class="panel-body">
             <perk-box ng-repeat="r in Ranks | limitTo:6:2" rank="{{r}}" label-width="2"
                       ng-model="frm.soldier.classPerks[Ranks.indexOf(r)-2]"
-                      is-disabled="frm.isPerkDisabled(r)">
-              <option></option>
-              <option ng-repeat="opt in ClassPerks[frm.soldier.class][r]" value="{{opt}}">
-                {{getPerkName(opt)}}
-              </option>
+                      is-disabled="frm.isPerkDisabled(r)"
+                      options="ClassPerks[frm.soldier.class][r]"
+                      render="getPerkName(opt)">
             </perk-box>
           </div>
         </div>
@@ -111,9 +109,9 @@
           <div class="panel-body">
             <perk-box ng-repeat="r in PsiRanks | limitTo:6:1" rank="{{r}}" label-width="3"
                       ng-model="frm.soldier.psiPerks[PsiRanks.indexOf(r)-1]"
-                      is-disabled="frm.isPsiPerkDisabled(r)">
-              <option></option>
-              <option ng-repeat="opt in PsiPerks[r]">{{getPerkName(opt)}}</option>
+                      is-disabled="frm.isPsiPerkDisabled(r)"
+                      options="PsiPerks[r]"
+                      render="getPerkName(opt)">
             </perk-box>
           </div>
         </div>

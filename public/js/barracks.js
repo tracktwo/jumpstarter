@@ -161,13 +161,15 @@
                rank: "@",
                labelWidth: "@",
                isDisabled: "=",
-               ngModel: "="
+               ngModel: "=",
+               options: "=",
+               render: "&"
            },
            transclude: true,
            template: '<div class="form-group">' +
            '<label class="control-label col-xs-{{labelWidth}}">{{rank}}</label>' +
           // '</div>' +
-           '<div class="col-xs-{{12-labelWidth}}"><select class="form-control" ng-disabled="isDisabled" ng-model="ngModel" ng-transclude></select></div>' +
+           '<div class="col-xs-{{12-labelWidth}}"><select class="form-control" ng-disabled="isDisabled" ng-model="ngModel" ng-options="render({opt: o}) for o in options"></select></div>' +
            '</div>'
        };
     });
