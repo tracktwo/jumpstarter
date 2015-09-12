@@ -1,5 +1,67 @@
-<h3>Barracks</h3>
-<div ng-controller="CustomSoldierCtrl as ctrl">
+<div ng-controller="CustomSoldierCtrl as rax">
+  <div>
+    <h3>Barracks - {{rax.getBarracksTitle()}}</h3>
+    <hr>
+  </div>
+
+  <div>
+    <h4>Random Soldiers</h4>
+
+    <form name="bulkForm" class="form form-horizontal" novalidate>
+      <div class="form-group form-group-sm">
+        <div class="col-xs-12">
+          <div class="row">
+            <!--<div class="col-xs-3">-->
+            <div class="col-xs-2 col-xs-offset-2">
+              <label class="control-label" for="bulkPFC">PFC:</label>
+              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[0]" id="bulkPFC"/>
+            </div>
+            <div class="col-xs-2">
+              <label class="control-label" for="bulkSPEC">SPEC:</label>
+              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[1]" id="bulkSPEC"/>
+            </div>
+            <!--</div>-->
+
+            <!--<div class="col-xs-3">-->
+            <div class="col-xs-2">
+              <label class="control-label" for="bulkLCPL">LCPL:</label>
+              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[2]" id="bulkLCPL"/>
+            </div>
+            <div class="col-xs-2">
+              <label class="control-label" for="bulkCPL">CPL:</label>
+              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[3]" id="bulkCPL"/>
+            </div>
+            <!--</div>-->
+          </div>
+          <div class="row">
+            <!--<div class="col-xs-3">-->
+            <div class="col-xs-2 col-xs-offset-2">
+              <label class="control-label" for="bulkSGT">SGT:</label>
+              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[4]" id="bulkSGT"/>
+            </div>
+            <div class="col-xs-2">
+              <label class="control-label" for="bulkTSGT">TSGT:</label>
+              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[5]" id="bulkTSGT"/>
+            </div>
+            <!--</div>-->
+            <!--<div class="col-xs-3">-->
+            <div class="col-xs-2">
+              <label class="control-label" for="bulkGSGT">GSGT:</label>
+              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[6]" id="bulkGSGT"/>
+            </div>
+            <div class="col-xs-2">
+              <label class="control-label" for="bulkMSGT">MSGT:</label>
+              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[7]" id="bulkMSGT"/>
+            </div>
+          </div>
+          <!--</div>-->
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <hr>
+  <h4>Custom Soldiers</h4>
   <table class="table">
     <thead>
     <tr>
@@ -12,19 +74,19 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="soldier in ini.soldiers" ng-click="ctrl.editSoldier(soldier)">
-      <td ng-class="{'text-muted': soldier.firstName == ''}">{{ctrl.printName(soldier.firstName)}}</td>
-      <td ng-class="{'text-muted': soldier.nickName == ''}">{{ctrl.printName(soldier.nickName)}}</td>
-      <td ng-class="{'text-muted': soldier.lastName == ''}">{{ctrl.printName(soldier.lastName)}}</td>
+    <tr ng-repeat="soldier in ini.soldiers" ng-click="rax.editSoldier(soldier)">
+      <td ng-class="{'text-muted': soldier.firstName == ''}">{{rax.printName(soldier.firstName)}}</td>
+      <td ng-class="{'text-muted': soldier.nickName == ''}">{{rax.printName(soldier.nickName)}}</td>
+      <td ng-class="{'text-muted': soldier.lastName == ''}">{{rax.printName(soldier.lastName)}}</td>
       <td>{{soldier.rank}}</td>
       <td>{{soldier.class}}</td>
-      <td><span class="glyphicon glyphicon-trash pointer" ng-click="ctrl.delSoldier($index)"></span></td>
+      <td><span class="glyphicon glyphicon-trash pointer" ng-click="rax.delSoldier($index)"></span></td>
     </tr>
     </tbody>
   </table>
 
   <button type="button" class="btn btn-primary form-control"
-          ng-click="ctrl.newSoldier()">
+          ng-click="rax.newSoldier()">
 
     <span class="glyphicon glyphicon-plus"></span>
     Add Soldier

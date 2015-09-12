@@ -4,14 +4,29 @@
   app.controller('CustomSoldierCtrl', ['$scope', '$modal', function ($scope, $modal) {
     var ctrl = this;
 
+    this.getBarracksTitle = function() {
+      var t = "";
+      var total = $scope.ini.soldiers.length;
+
+      $scope.ini.bulkSoldiers.forEach( function(v) {
+        total += v;
+      });
+
+      t += total + " soldier";
+      if ($scope.ini.soldiers.length != 1) {
+        t += "s";
+      }
+
+      return t;
+    };
+
     this.editSoldier = function (soldier) {
       this.openSoldierDialog(soldier);
     };
 
     this.newSoldier = function() {
       this.openSoldierDialog(null);
-    }
-
+    };
 
     this.openSoldierDialog = function(curSoldier) {
       var newSoldierDlg = $modal.open({

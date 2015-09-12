@@ -156,6 +156,7 @@
       meld: -1,
 
       soldiers: [],
+      bulkSoldiers: [0, 0, 0, 0, 0, 0, 0, 0],
       research: [],
       foundry: [],
       ots: []
