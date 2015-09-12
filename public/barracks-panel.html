@@ -1,32 +1,32 @@
 <h3>Barracks</h3>
 <div ng-controller="CustomSoldierCtrl as ctrl">
-    <table class="table">
-        <thead>
-        <tr>
-            <th class="col-xs-2">First Name</th>
-            <th class="col-xs-2">Nick Name</th>
-            <th class="col-xs-2">Last Name</th>
-            <th class="col-xs-1">Rank</th>
-            <th class="col-xs-2">Class</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="soldier in ini.soldiers" ng-click="ctrl.editSoldier(soldier)"
-            ng-class="{info: ctrl.isSelected(soldier)}">
-            <td ng-class="{'text-muted': soldier.firstName == ''}">{{ctrl.printName(soldier.firstName)}}</td>
-            <td ng-class="{'text-muted': soldier.nickName == ''}">{{ctrl.printName(soldier.nickName)}}</td>
-            <td ng-class="{'text-muted': soldier.lastName == ''}">{{ctrl.printName(soldier.lastName)}}</td>
-            <td>{{soldier.rank}}</td>
-            <td>{{soldier.class}}</td>
-        </tr>
-        </tbody>
-    </table>
+  <table class="table">
+    <thead>
+    <tr>
+      <th class="col-xs-2">First Name</th>
+      <th class="col-xs-2">Nick Name</th>
+      <th class="col-xs-2">Last Name</th>
+      <th class="col-xs-1">Rank</th>
+      <th class="col-xs-1">Class</th>
+      <th class="col-xs-1"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="soldier in ini.soldiers" ng-click="ctrl.editSoldier(soldier)">
+      <td ng-class="{'text-muted': soldier.firstName == ''}">{{ctrl.printName(soldier.firstName)}}</td>
+      <td ng-class="{'text-muted': soldier.nickName == ''}">{{ctrl.printName(soldier.nickName)}}</td>
+      <td ng-class="{'text-muted': soldier.lastName == ''}">{{ctrl.printName(soldier.lastName)}}</td>
+      <td>{{soldier.rank}}</td>
+      <td>{{soldier.class}}</td>
+      <td><span class="glyphicon glyphicon-trash pointer" ng-click="ctrl.delSoldier($index)"></span></td>
+    </tr>
+    </tbody>
+  </table>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Soldier Configuration</h3>
-        </div>
-        <div class="panel-body" ng-include="'barracks-soldier-form.html'">
-        </div>
-    </div>
+  <button type="button" class="btn btn-primary form-control"
+          ng-click="ctrl.newSoldier()">
+
+    <span class="glyphicon glyphicon-plus"></span>
+    Add Soldier
+  </button>
 </div>
