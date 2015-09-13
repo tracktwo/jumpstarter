@@ -1,5 +1,5 @@
 (function () {
-  var app = angular.module('jumpstarter', ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research']);
+  var app = angular.module('jumpstarter', ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items']);
 
   // Services
   app.factory('auth', ['$http', '$window', function ($http, $window) {
@@ -138,6 +138,10 @@
       $scope.OTS = response.data;
     });
 
+    $http.get("data/items.json").then(function (response) {
+      $scope.Items = response.data;
+    });
+
     $scope.ini = {
       title: "",
       author: "",
@@ -159,7 +163,8 @@
       bulkSoldiers: [0, 0, 0, 0, 0, 0, 0, 0],
       research: [],
       foundry: [],
-      ots: []
+      ots: [],
+      items: []
     };
 
     this.buildIni = function() {

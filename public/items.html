@@ -1,0 +1,32 @@
+<h3>Items</h3><br>
+
+<div ng-controller="ItemCtrl as items">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="col-xs-8">Item</th>
+        <th class="col-xs-4">Count</th>
+      </tr>
+    </thead>
+  </table>
+
+  <form name="itemform" class="form form-inline" novalidate>
+    <div class="form-group">
+    <select class="form-control" ng-model="items.currentItem" style="width: 280px"
+            ng-options="i.enum as i.name for i in Items | orderBy:'name'">
+      <!--<option ng-repeat="i in Items | orderBy:name | filter:removePresent">{{i.name}}</option>-->
+    </select>
+    </div>
+    <div class="form-group">
+    <input type="number" ng-model="items.currentCount" class="form-control" style="width: 80px">
+    </div>
+    <div class="form-group">
+    <button type="button" class="btn btn-default form-control"
+            ng-click="addItem(currentItem)" ng-disabled="isItemInvalid(currentItem)" style="width:auto">
+      <span class="glyphicon glyphicon-plus"></span>
+    </button>
+    </div>
+  </form>
+
+</div>
