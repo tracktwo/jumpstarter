@@ -57,22 +57,23 @@
   <table class="table">
     <thead>
     <tr>
+      <th class="col-xs-1"></th>
       <th class="col-xs-2">First Name</th>
       <th class="col-xs-2">Nick Name</th>
       <th class="col-xs-2">Last Name</th>
       <th class="col-xs-1">Rank</th>
       <th class="col-xs-1">Class</th>
-      <th class="col-xs-1"></th>
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="soldier in ini.soldiers" ng-click="rax.editSoldier(soldier)">
+    <tr ng-repeat="soldier in ini.soldiers">
+      <td><a href="" ng-click="rax.delSoldier($index)"><span class="glyphicon glyphicon-remove"></span></a><span style="padding: 15px"></span>
+      <a href="" ng-click="rax.editSoldier(soldier)"><span class="glyphicon glyphicon-pencil"></span></a></td>
       <td ng-class="{'text-muted': soldier.firstName == ''}">{{rax.printName(soldier.firstName)}}</td>
       <td ng-class="{'text-muted': soldier.nickName == ''}">{{rax.printName(soldier.nickName)}}</td>
       <td ng-class="{'text-muted': soldier.lastName == ''}">{{rax.printName(soldier.lastName)}}</td>
       <td>{{soldier.rank}}</td>
       <td>{{soldier.class}}</td>
-      <td><span class="glyphicon glyphicon-trash pointer" ng-click="rax.delSoldier($index)"></span></td>
     </tr>
     </tbody>
   </table>

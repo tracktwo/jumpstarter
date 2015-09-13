@@ -1,24 +1,24 @@
 <h3>Items</h3><br>
 
 <div ng-controller="ItemCtrl as items">
-
   <table class="table">
     <thead>
       <tr>
-        <th class="col-xs-4">Item</th>
+        <th class="col-xs-1" style="width: 30px"></th>
+        <th class="col-xs-10">Item</th>
         <th class="col-xs-1">Count</th>
-        <th class="col-xs-1"></th>
       </tr>
     </thead>
     <tbody>
     <tr ng-repeat="i in ini.items">
-      <td class="col-xs-4">{{getItemName(i.enum)}}</td>
+      <td >
+      <a href="" ng-click="items.removeItem($index)">
+      <span class="glyphicon glyphicon-remove"> </span></a></td>
+      <td> <span> {{getItemName(i.enum)}}</span></td>
       <td class="col-xs-1">{{i.count}}</td>
-      <td class="col-xs-1"><span class="glyphicon glyphicon-trash pointer" ng-click="items.removeItem($index)"></span></td>
     </tr>
     </tbody>
   </table>
-
   <form name="itemform" class="form form-inline" novalidate>
     <div class="form-group">
     <select class="form-control" ng-model="items.currentItem" style="width: 280px"
