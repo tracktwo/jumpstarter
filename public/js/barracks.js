@@ -4,20 +4,14 @@
   app.controller('CustomSoldierCtrl', ['$scope', '$modal', function ($scope, $modal) {
     var ctrl = this;
 
-    this.getBarracksTitle = function() {
-      var t = "";
+    this.getBarracksSize = function() {
       var total = $scope.ini.soldiers.length;
 
       $scope.ini.bulkSoldiers.forEach( function(v) {
         total += v;
       });
 
-      t += total + " soldier";
-      if ($scope.ini.soldiers.length != 1) {
-        t += "s";
-      }
-
-      return t;
+      return total;
     };
 
     this.editSoldier = function (soldier) {

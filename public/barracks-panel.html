@@ -1,6 +1,7 @@
 <div ng-controller="CustomSoldierCtrl as rax">
   <div>
-    <h3>Barracks - {{rax.getBarracksTitle()}}</h3>
+    <h3>Barracks - {{rax.getBarracksSize()}} soldier{{rax.getBarracksSize() == 1 ? "" : "s"}}</h3>
+    <span class="text-danger" ng-show="rax.getBarracksSize() >= 75">WARNING: Large barracks counts may cause crashes on statup!</span>
     <hr>
   </div>
 
