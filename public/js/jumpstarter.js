@@ -106,6 +106,12 @@
       })[0].name;
     };
 
+    $scope.getItemName = function(itemEnum) {
+      return $scope.Items.filter(function (v) {
+        return v.enum === itemEnum;
+      })[0].name;
+    };
+
     $http.get("data/countries.json").then(function (response) {
       $scope.Countries = response.data;
     });

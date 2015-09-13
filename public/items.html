@@ -5,25 +5,32 @@
   <table class="table">
     <thead>
       <tr>
-        <th class="col-xs-8">Item</th>
-        <th class="col-xs-4">Count</th>
+        <th class="col-xs-4">Item</th>
+        <th class="col-xs-1">Count</th>
+        <th class="col-xs-1"></th>
       </tr>
     </thead>
+    <tbody>
+    <tr ng-repeat="i in ini.items">
+      <td class="col-xs-4">{{getItemName(i.enum)}}</td>
+      <td class="col-xs-1">{{i.count}}</td>
+      <td class="col-xs-1"><span class="glyphicon glyphicon-trash pointer" ng-click="items.removeItem($index)"></span></td>
+    </tr>
+    </tbody>
   </table>
 
   <form name="itemform" class="form form-inline" novalidate>
     <div class="form-group">
     <select class="form-control" ng-model="items.currentItem" style="width: 280px"
-            ng-options="i.enum as i.name for i in Items | orderBy:'name'">
-      <!--<option ng-repeat="i in Items | orderBy:name | filter:removePresent">{{i.name}}</option>-->
+            ng-options="i.enum as i.name for i in Items | orderBy:'name' | filter:items.removePresent">
     </select>
     </div>
     <div class="form-group">
-    <input type="number" ng-model="items.currentCount" class="form-control" style="width: 80px">
+    <input type="number" ng-model="items.currentCount" class="form-control" style="width: 80px" min="1">
     </div>
     <div class="form-group">
     <button type="button" class="btn btn-default form-control"
-            ng-click="addItem(currentItem)" ng-disabled="isItemInvalid(currentItem)" style="width:auto">
+            ng-click="items.addItem()" ng-disabled="items.isItemInvalid()" style="width:auto">
       <span class="glyphicon glyphicon-plus"></span>
     </button>
     </div>
