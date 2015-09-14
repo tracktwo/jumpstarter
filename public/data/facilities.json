@@ -1,0 +1,18 @@
+[
+  { "enum": "eFacility_None", "name": "None" },
+  { "enum": "eFacility_ScienceLab", "name": "Laboratory" },
+  { "enum": "eFacility_Workshop", "name": "Workshop" },
+  { "enum": "eFacility_SmallRadar", "name": "Satellite Uplink" },
+  { "enum": "eFacility_Power", "name": "Fission Generator" },
+  { "enum": "eFacility_Foundry", "name": "Foundry" },
+  { "enum": "eFacility_OTS", "name": "Officer Training School" },
+  { "enum": "eFacility_AlienContain", "name": "Alien Containment" },
+  { "enum": "eFacility_LargeRadar", "name": "Satellite Nexus" },
+  { "enum": "eFacility_ThermalPower", "name": "Thermo Generator" },
+  { "enum": "eFacility_EleriumGenerator", "name": "Elerium Generator" },
+  { "enum": "eFacility_PsiLabs", "name": "Psionic Labs" },
+  { "enum": "eFacility_HyperwaveRadar", "name": "Hyperwave Relay" },
+  { "enum": "eFacility_DeusEx", "name": "Gollop Chamber" },
+  { "enum": "eFacility_CyberneticsLab", "name": "Repair Bay" },
+  { "enum": "eFacility_GeneticsLab", "name": "Genetics Lab" }
+]
