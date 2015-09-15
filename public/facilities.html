@@ -1,1 +1,26 @@
 <h3>Facilities</h3>
+
+<div ng-controller="FacilitiesCtrl as fac">
+
+  <div class="row" ng-repeat="y in [0,1,2,3]">
+    <facility-button
+        ng-repeat="x in [0,1,2]"
+        width="150px"
+        ng-model="ini.facilities[y][x]"
+        items="Facilities"
+        render="getFacilityName(enumVal)"
+        order="name"
+        filter="{name :'!None'}">
+    </facility-button>
+    <button class="btn btn-default" disabled="true">Lift</button>
+    <facility-button
+        ng-repeat="x in [4,5,6]"
+        width="150px"
+        ng-model="ini.facilities[y][x]"
+        items="Facilities"
+        render="getFacilityName(enumVal)"
+        order="name"
+        filter="{name: '!None'}">
+    </facility-button>
+  </div>
+</div>

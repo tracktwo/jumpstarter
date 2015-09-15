@@ -1,5 +1,6 @@
 (function () {
-  var app = angular.module('jumpstarter', ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items']);
+  var app = angular.module('jumpstarter',
+    ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items', 'facilities']);
 
   // Services
   app.factory('auth', ['$http', '$window', function ($http, $window) {
@@ -100,16 +101,22 @@
       "Master"
     ];
 
-    $scope.getPerkName = function (perkEnum) {
-      return $scope.Perks.filter(function (v) {
-        return v.enum === perkEnum;
+    $scope.getNameFromEnum = function (dataSet, enumVal) {
+      return dataSet.filter(function (v) {
+        return v.enum === enumVal;
       })[0].name;
     };
 
+    $scope.getPerkName = function (perkEnum) {
+      return $scope.getNameFromEnum($scope.Perks, perkEnum);
+    };
+
     $scope.getItemName = function(itemEnum) {
-      return $scope.Items.filter(function (v) {
-        return v.enum === itemEnum;
-      })[0].name;
+      return $scope.getNameFromEnum($scope.Items, itemEnum);
+    };
+
+    $scope.getFacilityName = function(facEnum) {
+      return $scope.getNameFromEnum($scope.Facilities, facEnum);
     };
 
     $http.get("data/countries.json").then(function (response) {
@@ -148,6 +155,10 @@
       $scope.Items = response.data;
     });
 
+    $http.get("data/facilities.json").then(function (response) {
+      $scope.Facilities = response.data;
+    });
+
     $scope.ini = {
       title: "",
       author: "",
@@ -170,7 +181,13 @@
       research: [],
       foundry: [],
       ots: [],
-      items: []
+      items: [],
+      facilities: [
+        ["eFacility_None", "eFacility_None", "eFacility_SmallRadar", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
+        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
+        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
+        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"]
+      ]
     };
 
     this.buildIni = function() {
