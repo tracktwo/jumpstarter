@@ -1,6 +1,6 @@
 (function () {
   var app = angular.module('jumpstarter',
-    ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items', 'facilities']);
+    ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items', 'facilities', 'world']);
 
   // Services
   app.factory('auth', ['$http', '$window', function ($http, $window) {
@@ -187,7 +187,8 @@
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"]
-      ]
+      ],
+      countries: [],
     };
 
     this.buildIni = function() {

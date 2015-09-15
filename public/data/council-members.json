@@ -1,0 +1,18 @@
+[
+  { "enum": "eCountry_Canada", "name": "Canada" },
+  { "enum": "eCountry_USA", "name": "United States" },
+  { "enum": "eCountry_Mexico", "name": "Mexico" },
+  { "enum": "eCountry_Argentina", "name": "Argentina" },
+  { "enum": "eCountry_Brazil", "name": "Brazil" },
+  { "enum": "eCountry_Egypt", "name": "Egypt" },
+  { "enum": "eCountry_Nigeria", "name": "Nigeria" },
+  { "enum": "eCountry_SouthAfrica", "name": "South Africa" },
+  { "enum": "eCountry_UK", "name": "United Kingdom" },
+  { "enum": "eCountry_France", "name": "France" },
+  { "enum": "eCountry_Germany", "name": "Germany" },
+  { "enum": "eCountry_Russia", "name": "Russia" },
+  { "enum": "eCountry_India", "name": "India" },
+  { "enum": "eCountry_China", "name": "China" },
+  { "enum": "eCountry_Japan", "name": "Japan" },
+  { "enum": "eCountry_Australia", "name": "Australia" }
+]
