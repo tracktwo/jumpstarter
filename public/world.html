@@ -3,7 +3,10 @@
 <div ng-controller="WorldCtrl as world">
   <form name="countryform" class="form form-horizontal" novalidate>
     <div class="form-group">
-    <country-form country="USA"></country-form>
+    <country-form ng-repeat="c in CouncilMembers" 
+        country="{{c.enum}}" 
+        ng-model="ini.countries[c.enum]">
+    </country-form>
     </div>
   </form>
 </div>

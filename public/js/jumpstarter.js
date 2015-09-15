@@ -119,6 +119,10 @@
       return $scope.getNameFromEnum($scope.Facilities, facEnum);
     };
 
+    $scope.getCountryName = function(countryEnum) {
+        return $scope.getNameFromEnum($scope.CouncilMembers, countryEnum);
+    };
+
     $http.get("data/countries.json").then(function (response) {
       $scope.Countries = response.data;
     });
@@ -159,6 +163,10 @@
       $scope.Facilities = response.data;
     });
 
+    $http.get("data/council-members.json").then(function (response) {
+        $scope.CouncilMembers = response.data;
+    });
+
     $scope.ini = {
       title: "",
       author: "",
@@ -188,7 +196,24 @@
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"]
       ],
-      countries: [],
+      countries: [ 
+          { enum:"eCountry_Canada", panic: 0, satellite:false, alienbase:false },
+          { enum:"eCountry_USA", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Mexico", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Argentina", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Brazil", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Egypt", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Nigeria", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_SouthAfrica", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_UK", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_France", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Germany", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Russia", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_India", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_China", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Japan", panic: 0, satellite:false, alienbase: false },
+          { enum:"eCountry_Australia", panic: 0, satellite:false, alienbase: false },
+      ],
     };
 
     this.buildIni = function() {
