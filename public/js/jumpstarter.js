@@ -196,25 +196,24 @@
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"]
       ],
-      countries: [ 
-          { enum:"eCountry_Canada", panic: 0, satellite:false, alienbase:false },
-          { enum:"eCountry_USA", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Mexico", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Argentina", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Brazil", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Egypt", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Nigeria", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_SouthAfrica", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_UK", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_France", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Germany", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Russia", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_India", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_China", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Japan", panic: 0, satellite:false, alienbase: false },
-          { enum:"eCountry_Australia", panic: 0, satellite:false, alienbase: false },
-      ],
+      countries: []
     };
+
+    $scope.ini.countries['eCountry_Canada'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_USA'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_Mexico'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_Argentina'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_Brazil'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_Nigeria'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_SouthAfrica'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_UK'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_France'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_Germany'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_Russia'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_India'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_China'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_Japan'] = {panic: 0, satellite:false, alienbase:false};
+    $scope.ini.countries['eCountry_Australia'] = {panic: 0, satellite:false, alienbase:false};
 
     this.buildIni = function() {
      $http.post("/buildini", $scope.ini).then(function (response) {

@@ -1,3 +1,10 @@
 <div>
-{{country}}
+  <b>{{country}}</b>
+  <form class="form form-inline">
+    Panic
+    <input class="form-control" type="number" min="0" max="99" style="width:60px" ng-model="ngModel.panic">
+    <input class="form-control" type="checkbox" ng-model="ngModel.satellite"> Satellite
+    <input class="form-control" type="checkbox" ng-model="ngModel.alienbase"> Alien Base
+</form>
+
 </div>

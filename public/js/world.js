@@ -1,16 +1,17 @@
-(function() {
-    var app = angular.module('world', []);
+(function () {
+  var app = angular.module('world', []);
 
-    app.controller('WorldCtrl', ['$scope', function ($scope) {
-    }]);
+  app.controller('WorldCtrl', ['$scope', function ($scope) {
+  }]);
 
-    app.directive('countryForm', function() {
-        return {
-            restrict: 'E',
-            scope: {
-                country: "@"
-            },
-            templateUrl: 'country-form.html'
-        };
-    });
+  app.directive('countryForm', function () {
+    return {
+      restrict: 'E',
+      scope: {
+        country: "@",
+        ngModel: "="
+      },
+      templateUrl: 'country-form.html'
+    };
+  });
 })();
