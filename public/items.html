@@ -1,12 +1,15 @@
 <h3>Items</h3><br>
 
 <div ng-controller="ItemCtrl as items">
+  <div class="row">
+  <div class="col-xs-5">
   <table class="table">
     <thead>
       <tr>
-        <th class="col-xs-1" style="width: 30px"></th>
-        <th class="col-xs-10">Item</th>
+        <th style="width: 30px"></th>
+        <th class="col-xs-11">Item</th>
         <th class="col-xs-1">Count</th>
+
       </tr>
     </thead>
     <tbody>
@@ -19,6 +22,9 @@
     </tr>
     </tbody>
   </table>
+  </div>
+  </div>
+  <div class="row">
   <form name="itemform" class="form form-inline" novalidate>
     <div class="form-group">
     <select class="form-control" ng-model="items.currentItem" style="width: 280px"
@@ -35,5 +41,5 @@
     </button>
     </div>
   </form>
-
+  </div>
 </div>
