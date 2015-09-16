@@ -1,0 +1,74 @@
+<h3>Air Force</h3>
+
+<div ng-controller="AirForceCtrl as af">
+  <div class="col-xs-11">
+  <table class="table" style="width: auto !important; table-layout: fixed">
+    <thead>
+    <tr>
+      <th class="tdremove">&nbsp;</th>
+      <th class="col-xs-4">Continent</th>
+      <th class="col-xs-5">Weapon</th>
+      <th class="col-xs-1">Kills</th>
+      <th class="col-xs-1">Firestorm</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="ship in ini.airforce">
+      <td class="td-remove">
+        <a href="" ng-click="af.removeShip($index)">
+          <span class="glyphicon glyphicon-remove"> </span></a>
+      </td>
+      <td>{{getContinentName(ship.continent)}}</td>
+      <td>{{getItemName(ship.weapon)}}</td>
+      <td> {{ship.kills}}</td>
+      <td><span class="glyphicon" ng-class="ship.firestorm ? 'glyphicon-ok' : ''"></span></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <h4>Add Ship</h4><br>
+
+  <form name="shipform" class="form" novalidate>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-md-4">
+        <div class="form-group">
+          <label for="continent">Continent: </label>
+          <select class="form-control" ng-model="af.continent" id="continent"
+                  ng-options="i.enum as i.name for i in Continents">
+          </select>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-3">
+        <div class="form-group">
+          <label for="weapon">Weapon: </label>
+          <select class="form-control" ng-model="af.weapon" id="weapon"
+                  ng-options="w as getItemName(w) for w in ShipWeapons">
+
+          </select>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-2">
+      <div class="form-group">
+        <label for="kills">Kills: </label>
+        <input type="number" ng-model="af.kills" class="form-control" min="0" id="kills">
+      </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-md-1">
+      <div class="form-group">
+        <label for="firestorm">Firestorm: </label>
+        <input type="checkbox" ng-model="af.firestorm" class="form-control" id="firestorm">
+      </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="button" class="btn btn-default form-control"
+              ng-click="af.addShip()" ng-disabled="af.isShipInvalid()" style="width:auto">
+        <span class="glyphicon glyphicon-plus"></span> Add Ship
+      </button>
+    </div>
+  </form>
+</div>
+</div>

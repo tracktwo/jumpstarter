@@ -13,6 +13,7 @@
   <script src="js/items.js"></script>
   <script src="js/facilities.js"></script>
   <script src="js/world.js"></script>
+  <script src="js/airforce.js"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
   <style type="text/css">
@@ -25,6 +26,10 @@
     }
     .center-block {
       float: none !important;
+    }
+    th.tdremove {
+      width: 32px !important;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -50,6 +55,9 @@
     </pane>
     <pane title="World">
       <div ng-include="'world.html'"></div>
+    </pane>
+    <pane title="Air Force">
+      <div ng-include="'airforce.html'"></div>
     </pane>
 
   </tabs>

@@ -1,6 +1,6 @@
 (function () {
   var app = angular.module('jumpstarter',
-    ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items', 'facilities', 'world']);
+    ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items', 'facilities', 'world', 'airforce']);
 
   // Services
   app.factory('auth', ['$http', '$window', function ($http, $window) {
@@ -101,6 +101,14 @@
       "Master"
     ];
 
+    $scope.Continents = [
+      { enum: "eContinent_NorthAmerica", name: "North America" },
+      { enum: "eContinent_SouthAmerica", name: "South America" },
+      { enum: "eContinent_Europe", name: "Europe" },
+      { enum: "eContinent_Africa", name: "Africa" },
+      { enum: "eContinent_Asia", name: "Asia" }
+    ];
+
     $scope.getNameFromEnum = function (dataSet, enumVal) {
       return dataSet.filter(function (v) {
         return v.enum === enumVal;
@@ -121,6 +129,10 @@
 
     $scope.getCountryName = function(countryEnum) {
         return $scope.getNameFromEnum($scope.CouncilMembers, countryEnum);
+    };
+
+    $scope.getContinentName = function(continentEnum) {
+      return $scope.getNameFromEnum($scope.Continents, continentEnum);
     };
 
     $http.get("data/countries.json").then(function (response) {
@@ -157,6 +169,10 @@
 
     $http.get("data/items.json").then(function (response) {
       $scope.Items = response.data;
+    });
+
+    $http.get("data/ship-weapons.json").then(function (response) {
+      $scope.ShipWeapons = response.data;
     });
 
     $http.get("data/facilities.json").then(function (response) {
@@ -196,7 +212,8 @@
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
         ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"]
       ],
-      countries: []
+      countries: [],
+      airforce: []
     };
 
     $scope.ini.countries['eCountry_Canada'] = {panic: 0, satellite:false, alienbase:false};
