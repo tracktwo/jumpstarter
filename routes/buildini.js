@@ -30,6 +30,17 @@ var buildResearch = function(jstart) {
 var buildFacilities = function(jstart) {
   var str = buildHeader("FACILITIES");
 
+  for (var y = 0; y < 4; ++y) {
+    for (var x = 0; x < 7; ++x) {
+      console.log(jstart.facilities[y][x]);
+      if (jstart.facilities[y][x] != 'eFacility_None') {
+        str += "facility=(iType=" + jstart.facilities[y][x] +
+          ", X=" + x +
+          ", Y=" + (y+1) + ")\n";
+      }
+    }
+  }
+  return str;
 };
 
 var convertToIni = function(jstart) {
