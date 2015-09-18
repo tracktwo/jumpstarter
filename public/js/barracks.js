@@ -68,10 +68,10 @@
         firstName: "",
         lastName: "",
         nickName: "",
-        rank: $scope.Ranks[0],
-        class: $scope.Classes[0],
-        gender: $scope.Genders[0],
-        psiRank: $scope.PsiRanks[0],
+        rank: $scope.Ranks[0].enum,
+        class: $scope.Classes[0].enum,
+        gender: $scope.Genders[0].enum,
+        psiRank: $scope.PsiRanks[0].enum,
         country: "",
         classPerks: ["", "", "", "", "", ""],
         psiPerks: ["", "", "", "", "", ""],
@@ -101,11 +101,11 @@
     };
 
     this.rankChanged = function () {
-      if (this.soldier.rank == $scope.Ranks[0]) {
-        this.soldier.class = $scope.Classes[0];
+      if (this.soldier.rank == $scope.Ranks[0].enum) {
+        this.soldier.class = $scope.Classes[0].enum;
       }
 
-      var rankIdx = $scope.Ranks.indexOf(this.soldier.rank);
+      var rankIdx = $scope.getRankIndex(this.soldier.rank);
       for (i = 0; i < 6; ++i) {
         if (rankIdx < (i + 2)) {
           this.soldier.classPerks[i] = "";
@@ -122,17 +122,19 @@
     };
 
     this.isClassDisabled = function () {
-      return this.soldier.rank == $scope.Ranks[0];
+      return this.soldier.rank == $scope.Ranks[0].enum;
     };
 
     this.isPerkDisabled = function (rank) {
-      return this.soldier.class == "None" ||
-        ($scope.Ranks.indexOf(this.soldier.rank) < $scope.Ranks.indexOf(rank));
+      return this.soldier.class == $scope.Classes[0].enum ||
+        ($scope.getRankIndex(this.soldier.rank) < $scope.getRankIndex(rank));
+        //($scope.Ranks.indexOf(this.soldier.rank) < $scope.Ranks.indexOf(rank));
     };
 
     this.isPsiPerkDisabled = function (rank) {
-      return this.soldier.psiRank == "None" ||
-        ($scope.PsiRanks.indexOf(this.soldier.psiRank) < $scope.PsiRanks.indexOf(rank));
+      return this.soldier.psiRank == $scope.PsiRanks[0] ||
+        ($scope.getPsiRankIndex(this.soldier.psiRank) < $scope.getPsiRankIndex(rank));
+        //($scope.PsiRanks.indexOf(this.soldier.psiRank) < $scope.PsiRanks.indexOf(rank));
     };
 
     this.addExtraPerk = function (prk) {

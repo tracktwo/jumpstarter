@@ -59,32 +59,32 @@
 
   app.controller('JumpStarterCtrl', ['$scope', '$http', function ($scope, $http) {
     $scope.Ranks = [
-      "PFC",
-      "SPEC",
-      "LCPL",
-      "CPL",
-      "SGT",
-      "TSGT",
-      "GSGT",
-      "MSGT"
+      { name: "PFC", enum: "eRank_Rookie" },
+      { name: "SPEC", enum: "eRank_Squaddie" },
+      { name: "LCPL", enum: "eRank_Corporal" },
+      { name: "CPL", enum: "eRank_Sergeant" },
+      { name: "SGT", enum: "eRank_Lieutenant" },
+      { name: "TSGT", enum: "eRank_Captain" },
+      { name: "GSGT", enum: "eRank_Major" },
+      { name: "MSGT", enum: "eRank_Colonel" }
     ];
 
     $scope.Classes = [
-      "None",
-      "Sniper",
-      "Scout",
-      "Assault",
-      "Infantry",
-      "Rocketeer",
-      "Gunner",
-      "Medic",
-      "Engineer"
+      { name: "None", enum: "eSC_None" },
+      { name: "Sniper", enum: 11 },
+      { name: "Scout", enum: 21 },
+      { name: "Assault", enum: 14 },
+      { name: "Infantry", enum: 24 },
+      { name: "Rocketeer", enum: 12 },
+      { name: "Gunner", enum: 22 },
+      { name: "Medic", enum: 13 },
+      { name: "Engineer", enum: 23 }
     ];
 
     $scope.Genders = [
-      "",
-      "M",
-      "F"
+      { name: "", enum: "eGender_None" },
+      { name: "M", enum: "eGender_Male" },
+      { name: "F", enum: "eGender_Female" }
     ];
 
     $scope.Countries = [
@@ -92,13 +92,13 @@
     ];
 
     $scope.PsiRanks = [
-      "None",
-      "Awakened",
-      "Sensitive",
-      "Talent",
-      "Adept",
-      "Psion",
-      "Master"
+      { name: "None", enum: 0 },
+      { name: "Awakened", enum: 1 },
+      { name: "Sensitive", enum: 2 },
+      { name: "Talent", enum: 3 },
+      { name: "Adept", enum: 4 },
+      { name: "Psion", enum: 5 },
+      { name: "Master", enum: 6 }
     ];
 
     $scope.Continents = [
@@ -150,6 +150,32 @@
 
     $scope.getOTSName = function(e) {
       return $scope.getNameFromEnum($scope.OTS, e);
+    };
+
+    $scope.getClassName = function(e) {
+      return $scope.getNameFromEnum($scope.Classes, e);
+    };
+
+    $scope.getRankName = function(e) {
+      return $scope.getNameFromEnum($scope.Ranks, e);
+    };
+
+    $scope.getRankIndex = function(r) {
+      for (var i = 0; i < $scope.Ranks.length; ++i) {
+        if ($scope.Ranks[i].enum === r) {
+          return i;
+        }
+      }
+      return -1;
+    };
+
+    $scope.getPsiRankIndex = function(r) {
+      for (var i = 0; i < $scope.PsiRanks.length; ++i) {
+        if ($scope.PsiRanks[i].enum === r) {
+          return i;
+        }
+      }
+      return -1;
     };
 
     $http.get("data/countries.json").then(function (response) {

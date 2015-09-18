@@ -72,8 +72,8 @@
       <td ng-class="{'text-muted': soldier.firstName == ''}">{{rax.printName(soldier.firstName)}}</td>
       <td ng-class="{'text-muted': soldier.nickName == ''}">{{rax.printName(soldier.nickName)}}</td>
       <td ng-class="{'text-muted': soldier.lastName == ''}">{{rax.printName(soldier.lastName)}}</td>
-      <td>{{soldier.rank}}</td>
-      <td>{{soldier.class}}</td>
+      <td>{{getRankName(soldier.rank)}}</td>
+      <td>{{getClassName(soldier.class)}}</td>
     </tr>
     </tbody>
   </table>
