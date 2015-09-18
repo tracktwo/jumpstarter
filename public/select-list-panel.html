@@ -7,14 +7,14 @@
       <li class="list-unstyled" ng-repeat="p in list">
         <a href="" ng-click="removeItem($index)">
           <span class="glyphicon glyphicon-remove"></span></a>
-        {{p}}
+        {{render({e: p})}}
       </li>
     </ul>
     <div class="form-inline">
       <div class="form-group form-group-sm">
         <div class="col-xs-12">
-          <select class="form-control" ng-model="currentItem" style="width: 180px">
-            <option ng-repeat="p in opts | orderBy:order | filter:removePresent">{{p.name}}</option>
+          <select class="form-control" ng-model="currentItem" style="width: 180px"
+              ng-options="p.enum as p.name for p in opts">
           </select>
             <button type="button" class="btn btn-default form-control"
                     ng-click="addItem(currentItem)" ng-disabled="isItemInvalid(currentItem)" style="width:auto">

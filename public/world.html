@@ -5,4 +5,12 @@
     <country-form country="{{c.name}}" ng-model="ini.countries[c.enum]">
     </country-form>
   </div>
+  <div class="col-xs-12">
+    <hr>
+
+    <form class="form form-horizontal">
+      <label for="randombases">Random Bases:</label>
+      <input class="form-control" type="number" id="randombases" ng-model="ini.randombases" min="-1" max="15" style="width: 60px">
+    </form>
+  </div>
 </div>

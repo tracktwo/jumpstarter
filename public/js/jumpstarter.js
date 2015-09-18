@@ -135,6 +135,18 @@
       return $scope.getNameFromEnum($scope.Continents, continentEnum);
     };
 
+    $scope.getResearchName = function(e) {
+      return $scope.getNameFromEnum($scope.Research, e);
+    };
+
+    $scope.getFoundryName = function(e) {
+      return $scope.getNameFromEnum($scope.Foundry, e);
+    };
+
+    $scope.getOTSName = function(e) {
+      return $scope.getNameFromEnum($scope.OTS, e);
+    };
+
     $http.get("data/countries.json").then(function (response) {
       $scope.Countries = response.data;
     });
@@ -199,6 +211,7 @@
       scientists: -1,
       engineers: -1,
       meld: -1,
+      randombases: -1,
 
       soldiers: [],
       bulkSoldiers: [0, 0, 0, 0, 0, 0, 0, 0],
@@ -273,7 +286,8 @@
         title: "@",
         list: "=",
         opts: "=",
-        order: "@"
+        order: "@",
+        render: "&"
       },
       link: function($scope, element, attrs) {
         $scope.currentItem = "";

@@ -7,18 +7,21 @@
         <select-list-panel title="Research Projects"
                            list="ini.research"
                            opts="Research"
+                           render="getResearchName(e)"
                            order="name"></select-list-panel>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4">
         <select-list-panel title="Foundry Projects"
                            list="ini.foundry"
                            opts="Foundry"
+                           render="getFoundryName(e)"
                            order="name"></select-list-panel>
       </div>
       <div class="col-xs-12 col-sm-6 col-md-4">
         <select-list-panel title="OTS Projects"
                            list="ini.ots"
                            opts="OTS"
+                           render="getOTSName(e)"
                            order="name"></select-list-panel>
       </div>
     </div>
