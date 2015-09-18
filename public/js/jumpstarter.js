@@ -110,6 +110,11 @@
     ];
 
     $scope.getNameFromEnum = function (dataSet, enumVal) {
+      if (dataSet.length == 0)
+      {
+        return "";
+      }
+
       return dataSet.filter(function (v) {
         return v.enum === enumVal;
       })[0].name;
@@ -221,9 +226,9 @@
       items: [],
       facilities: [
         ["eFacility_None", "eFacility_None", "eFacility_SmallRadar", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
-        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
-        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
-        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"]
+        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"],
+        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"],
+        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"]
       ],
       countries: [],
       airforce: []

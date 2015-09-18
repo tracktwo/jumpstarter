@@ -12,7 +12,8 @@
         order="name"
         filter="{name :'!None'}">
     </facility-button>
-    <button class="btn btn-default" disabled="true">Lift</button>
+    <button class="btn btn-default" ng-model="ini.facilities[y][3]" style="width: 6em"
+            ng-click="fac.toggleLift(y)">{{fac.getLiftName(y)}}</button>
     <facility-button
         ng-repeat="x in [4,5,6]"
         width="150px"
