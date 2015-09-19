@@ -127,6 +127,13 @@ var buildBarracks = function(jstart) {
     str += ")\n";
   }
 
+  // And add the bulk soldiers
+  for (i = 0; i < jstart.bulkSoldiers.length; ++i) {
+    if (jstart.bulkSoldiers[i] > 0) {
+      str += "blanksoldier=(iRank=" + i + ", iCount=" + jstart.bulkSoldiers[i] + ")\n";
+    }
+  }
+
   str += "\n";
   return str;
 };
