@@ -158,7 +158,7 @@
   {"enum": "eItem_Grapple", "name": "Grapple" },
   {"enum": "eItem_HeavyLaser", "name": "Pulse Autoblaster" },
   {"enum": "eItem_HeavyPlasma", "name": "Plasma Novagun" },
-  {"enum": "eItem_HeavyPlasma_Floater", "name": "Alien Rifle" },
+  {"enum": "eItem_PlasmaAssaultRifle_Muton", "name": "Alien Rifle" },
   {"enum": "eItem_HeavyPlasma_Muton", "name": "Alien Heavy Weapon" },
   {"enum": "eItem_HyperwaveBeacon", "name": "Hyperwave Beacon" },
   {"enum": "eItem_IntConsumable_Boost", "name": "UFO Tracking (Boost)" },
