@@ -32,7 +32,6 @@ var buildFacilities = function(jstart) {
 
   for (var y = 0; y < 4; ++y) {
     for (var x = 0; x < 7; ++x) {
-      console.log(jstart.facilities[y][x]);
       if (jstart.facilities[y][x] != 'eFacility_None') {
         str += "facility=(iType=" + jstart.facilities[y][x] +
           ", X=" + x +
@@ -57,6 +56,37 @@ var addComponent = function(v, k, defaultVal, addComma, addQuotes) {
     } else {
       str += v;
     }
+  }
+  return str;
+};
+
+var buildPerks = function(s) {
+  var str = "";
+
+  for (var i = 0; i < 6; ++i) {
+    if (s.classPerks[i] != "") {
+      if (str != "") {
+        str += ", ";
+      }
+      str += s.classPerks[i];
+    }
+  }
+
+  for (i = 0; i < 6; ++i) {
+    if (s.psiPerks[i] != "") {
+      if (str != "") {
+        str += ", ";
+      }
+      str += s.psiPerks[i];
+    }
+  }
+
+  for (i = 0; i < s.extraPerks.length; ++i) {
+    console.log(s.extraPerks[i]);
+    if (str != "") {
+      str += ", ";
+    }
+    str += s.extraPerks[i];
   }
   return str;
 };
@@ -87,6 +117,11 @@ var buildBarracks = function(jstart) {
 
     if (s.country != "") {
       str += addComponent(s.country, "iCountry", -1, true, false);
+    }
+
+    var perkLine = buildPerks(s);
+    if (perkLine != "") {
+      str += ", iPerk=(" + perkLine +")";
     }
 
     str += ")\n";
