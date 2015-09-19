@@ -40,6 +40,7 @@ var buildFacilities = function(jstart) {
       }
     }
   }
+  str += "\n";
   return str;
 };
 
@@ -84,9 +85,14 @@ var buildBarracks = function(jstart) {
 
     str += s.bonusAttrib ? ", bAttribBonus=true" : ", bAttribBonus=false";
 
+    if (s.country != "") {
+      str += addComponent(s.country, "iCountry", -1, true, false);
+    }
 
     str += ")\n";
   }
+
+  str += "\n";
   return str;
 };
 

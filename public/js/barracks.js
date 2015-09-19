@@ -72,7 +72,7 @@
         class: $scope.Classes[0].enum,
         gender: $scope.Genders[0].enum,
         psiRank: $scope.PsiRanks[0].enum,
-        country: "",
+        country: -1,
         classPerks: ["", "", "", "", "", ""],
         psiPerks: ["", "", "", "", "", ""],
         extraPerks: [],

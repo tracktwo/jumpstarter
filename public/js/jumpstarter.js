@@ -178,6 +178,10 @@
       return -1;
     };
 
+    $scope.getCountryIndex = function(countryName) {
+      return $scope.Countries.indexOf(countryName)-1;
+    };
+
     $http.get("data/countries.json").then(function (response) {
       $scope.Countries = response.data;
     });
