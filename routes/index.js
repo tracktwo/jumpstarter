@@ -9,7 +9,7 @@ var User = mongoose.model('User');
 var JumpStart = mongoose.model('JumpStart');
 
 // Auth
-var key = fs.readFileSync('secret.dat');
+var key = fs.readFileSync('./secret.dat');
 var auth = jwt({secret: key, userProperty: 'payload'});
 
 
