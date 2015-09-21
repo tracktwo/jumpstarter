@@ -14,7 +14,7 @@
       <div class="form-group form-group-sm">
         <div class="col-xs-12">
           <select class="form-control" ng-model="currentItem" style="width: 180px"
-              ng-options="p.enum as p.name for p in opts">
+              ng-options="p.enum as p.name for p in opts | orderBy:order">
           </select>
             <button type="button" class="btn btn-default form-control"
                     ng-click="addItem(currentItem)" ng-disabled="isItemInvalid(currentItem)" style="width:auto">
