@@ -272,7 +272,7 @@
     $scope.ini.countries.eCountry_Egypt = {panic: 0, satellite:false, alienbase:false};
     $scope.ini.countries.eCountry_Nigeria = {panic: 0, satellite:false, alienbase:false};
     $scope.ini.countries.eCountry_SouthAfrica = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_UK = {panic: 13, satellite:false, alienbase:false};
+    $scope.ini.countries.eCountry_UK = {panic: 0, satellite:false, alienbase:false};
     $scope.ini.countries.eCountry_France = {panic: 0, satellite:false, alienbase:false};
     $scope.ini.countries.eCountry_Germany = {panic: 0, satellite:false, alienbase:false};
     $scope.ini.countries.eCountry_Russia = {panic: 0, satellite:false, alienbase:false};
