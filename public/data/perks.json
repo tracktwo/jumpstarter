@@ -6,7 +6,7 @@
     { "enum": "ePerk_SmokeAndMirrors", "name": "Smoke and Mirrors" },
     { "enum": "ePerk_DisablingShot", "name": "Disabling Shot" },
     { "enum": "ePerk_GreaterMindMerge", "name": "Greater Mind Merge" },
-    { "enum": "ePerk_Overload", "name": "Overload" },
+    { "enum": "ePerk_Hardened", "name": "Hardened" },
     { "enum": "ePerk_PsiControl", "name": "Psi Control" },
     { "enum": "ePerk_MindControl", "name": "Mind Control" },
     { "enum": "ePerk_Foundry_AdvancedFlight", "name": "Fire in the Hole" },
