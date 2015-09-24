@@ -7,8 +7,9 @@
         ng-repeat="x in [0,1,2]"
         width="150px"
         ng-model="ini.facilities[y][x]"
-        items="Facilities"
-        render="getFacilityName(enumVal)"
+        facilities="Facilities"
+        tiles="Tiles"
+        render="getFacilityOrTileName(enumVal)"
         order="name"
         filter="{name :'!None'}">
     </facility-button>
@@ -18,8 +19,9 @@
         ng-repeat="x in [4,5,6]"
         width="150px"
         ng-model="ini.facilities[y][x]"
-        items="Facilities"
-        render="getFacilityName(enumVal)"
+        facilities="Facilities"
+        tiles="Tiles"
+        render="getFacilityOrTileName(enumVal)"
         order="name"
         filter="{name: '!None'}">
     </facility-button>

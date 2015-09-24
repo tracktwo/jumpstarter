@@ -25,7 +25,8 @@
           ngModel: "=",
           width: "@",
           render: "&",
-          items: "=",
+          facilities: "=",
+          tiles: "=",
           order: "@",
           filter: "=",
           ngDisabled: "="

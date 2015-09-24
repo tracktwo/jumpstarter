@@ -5,6 +5,8 @@
   <ul class="dropdown-menu" role="menu">
     <li role="menuitem"><a href="#" ng-click="selectItem('eFacility_None')">None</a></li>
     <li role="separator" class="divider"></li>
-    <li role="menuitem" ng-repeat="f in items | orderBy:order | filter:filter" ><a href="#" ng-click="selectItem(f.enum)">{{f.name}}</a></li>
+    <li role="menuitem" ng-repeat="f in tiles | orderBy:order" ><a href="#" ng-click="selectItem(f.enum)">{{f.name}}</a></li>
+    <li role="separator" class="divider"></li>
+    <li role="menuitem" ng-repeat="f in facilities | orderBy:order | filter:filter" ><a href="#" ng-click="selectItem(f.enum)">{{f.name}}</a></li>
   </ul>
 </div>

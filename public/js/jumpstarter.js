@@ -109,15 +109,25 @@
       { enum: "eContinent_Asia", name: "Asia" }
     ];
 
+    $scope.Tiles = [
+      { "enum": "eTile_Excavated", "name": "Excavated Tile" },
+      { "enum": "eTile_Steam", "name": "Steam Vent" },
+      { "enum": "eTile_ExcavatedSteam", "name": "Excavated Steam" }
+    ];
+
     $scope.getNameFromEnum = function (dataSet, enumVal) {
       if (dataSet.length == 0)
       {
         return "";
       }
 
-      return dataSet.filter(function (v) {
+      var results = dataSet.filter(function (v) {
         return v.enum === enumVal;
-      })[0].name;
+      });
+      if (results.length == 0) {
+        return "";
+      }
+      return results[0].name;
     };
 
     $scope.getPerkName = function (perkEnum) {
@@ -128,8 +138,12 @@
       return $scope.getNameFromEnum($scope.Items, itemEnum);
     };
 
-    $scope.getFacilityName = function(facEnum) {
-      return $scope.getNameFromEnum($scope.Facilities, facEnum);
+    $scope.getFacilityOrTileName = function(facEnum) {
+      var name = $scope.getNameFromEnum($scope.Facilities, facEnum);
+      if (name != "")
+        return name;
+      else
+        return $scope.getNameFromEnum($scope.Tiles, facEnum);
     };
 
     $scope.getCountryName = function(countryEnum) {

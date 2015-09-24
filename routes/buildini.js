@@ -33,7 +33,12 @@ var buildFacilities = function(jstart) {
   for (var y = 0; y < 4; ++y) {
     for (var x = 0; x < 7; ++x) {
       if (jstart.facilities[y][x] != 'eFacility_None') {
-        str += "facility=(iType=" + jstart.facilities[y][x] +
+        if (jstart.facilities[y][x].indexOf("eTile_") == 0) {
+          str += "tile=";
+        } else {
+          str += "facility=";
+        }
+        str += "(iType=" + jstart.facilities[y][x] +
           ", X=" + x +
           ", Y=" + (y+1) + ")\n";
       }
