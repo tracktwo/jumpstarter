@@ -110,7 +110,7 @@
     ];
 
     $scope.Tiles = [
-      { "enum": "eTile_Excavated", "name": "Excavated Tile" },
+      { "enum": "eTile_Excavated", "name": "Excavated" },
       { "enum": "eTile_Steam", "name": "Steam Vent" },
       { "enum": "eTile_ExcavatedSteam", "name": "Excavated Steam" }
     ];
