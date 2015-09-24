@@ -2,7 +2,37 @@
 
 <div ng-controller="FacilitiesCtrl as fac">
 
-  <div class="row" ng-repeat="y in [0,1,2,3]">
+  <div class="row">
+    <!-- Special case the first row to make the small radar & lift disabled -->
+    <facility-button ng-repeat="x in [0,1]"
+                     width="150px"
+                     ng-model="ini.facilities[0][x]"
+                     items="Facilities"
+                     render="getFacilityName(enumVal)"
+                     order="name"
+                     filter="{name: '!None'}">
+    </facility-button>
+    <facility-button width="150px"
+                     ng-model="ini.facilities[0][2]"
+                     items="Facilities"
+                     render="getFacilityName(enumVal)"
+                     order="name"
+                     ng-disabled="true"
+                     filter="{name: '!None'}">
+    </facility-button>
+    <button class="btn btn-default" ng-model="ini.facilities[0][3]" style="width: 6em"
+            ng-disabled="true">{{fac.getLiftName(0)}}
+    </button>
+    <facility-button ng-repeat="x in [4,5,6]"
+                     width="150px"
+                     ng-model="ini.facilities[0][x]"
+                     items="Facilities"
+                     render="getFacilityName(enumVal)"
+                     order="name"
+                     filter="{name: '!None'}">
+  </div>
+
+  <div class="row" ng-repeat="y in [1,2,3]">
     <facility-button
         ng-repeat="x in [0,1,2]"
         width="150px"
@@ -23,5 +53,11 @@
         order="name"
         filter="{name: '!None'}">
     </facility-button>
+  </div>
+
+  <div class="col-xs-8" >
+    <span class="text-danger">Warning: If you select a country bonus that awards free facilities
+      do not place facilities over those starting locations. This can cause unremovable facilities
+      and increased maintenance costs!</span>
   </div>
 </div>

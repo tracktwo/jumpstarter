@@ -1,5 +1,5 @@
 <div class="btn-group" dropdown is-open="status.isopen">
-<button type="button" class="btn btn-default" dropdown-toggle ng-style="{width: width}">
+<button type="button" class="btn btn-default" dropdown-toggle ng-style="{width: width}" ng-disabled="{{ngDisabled}}">
   {{render({enumVal: ngModel})}} <span class="caret"></span>
 </button>
   <ul class="dropdown-menu" role="menu">

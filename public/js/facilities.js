@@ -27,7 +27,8 @@
           render: "&",
           items: "=",
           order: "@",
-          filter: "="
+          filter: "=",
+          ngDisabled: "="
         },
         templateUrl: 'facility-button.html',
         link: function(scope, elem, attrs, ngModel) {
