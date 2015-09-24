@@ -32,9 +32,6 @@ var buildFacilities = function(jstart) {
 
   for (var y = 0; y < 4; ++y) {
     for (var x = 0; x < 7; ++x) {
-      // Do not write the initial sat uplink (2,0) or lift (3,0)
-      if (y == 0 && (x == 2 || x == 3))
-        continue;
       if (jstart.facilities[y][x] != 'eFacility_None') {
         str += "facility=(iType=" + jstart.facilities[y][x] +
           ", X=" + x +
