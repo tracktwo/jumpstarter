@@ -7,47 +7,73 @@
 
   <div>
     <h4>Bulk Soldiers</h4>
+    <div class="col-xs-11">
+      <table class="table" style="width: auto !important; table-layout: fixed">
+        <thead>
+        <tr>
+          <th class="tdremove">&nbsp;</th>
+          <th class="col-xs-1">Rank</th>
+          <th class="col-xs-1">Number</th>
+          <th class="col-xs-3">Country</th>
+          <th class="col-xs-2">Gender</th>
+          <th class="col-xs-4">&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="s in ini.bulkSoldiers">
+          <td class="tdremove">
+            <a href="" ng-click="rax.removeBulkSoldiers($index)">
+              <span class="glyphicon glyphicon-remove"></span>
+            </a>
+          </td>
+          <td>{{getRankName(s.rank)}}</td>
+          <td>{{s.count}}</td>
+          <td>{{getCountryName(s.country)}}</td>
+          <td>{{getGenderName(s.gender)}}</td>
 
-    <form name="bulkForm" class="form form-horizontal" novalidate>
-      <div class="form-group form-group-sm">
-        <div class="col-xs-12">
-          <div class="row">
-            <div class="col-xs-2 col-xs-offset-2">
-              <label class="control-label" for="bulkPFC">PFC:</label>
-              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[0]" id="bulkPFC"/>
-            </div>
-            <div class="col-xs-2">
-              <label class="control-label" for="bulkSPEC">SPEC:</label>
-              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[1]" id="bulkSPEC"/>
-            </div>
-            <div class="col-xs-2">
-              <label class="control-label" for="bulkLCPL">LCPL:</label>
-              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[2]" id="bulkLCPL"/>
-            </div>
-            <div class="col-xs-2">
-              <label class="control-label" for="bulkCPL">CPL:</label>
-              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[3]" id="bulkCPL"/>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-2 col-xs-offset-2">
-              <label class="control-label" for="bulkSGT">SGT:</label>
-              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[4]" id="bulkSGT"/>
-            </div>
-            <div class="col-xs-2">
-              <label class="control-label" for="bulkTSGT">TSGT:</label>
-              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[5]" id="bulkTSGT"/>
-            </div>
-            <div class="col-xs-2">
-              <label class="control-label" for="bulkGSGT">GSGT:</label>
-              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[6]" id="bulkGSGT"/>
-            </div>
-            <div class="col-xs-2">
-              <label class="control-label" for="bulkMSGT">MSGT:</label>
-              <input class="form-control" type="number" ng-model="ini.bulkSoldiers[7]" id="bulkMSGT"/>
-            </div>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <form name="bulkForm" class="form form" novalidate ng-controller="BulkSoldierForm as bsf">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-2">
+          <div class="form-group">
+            <label for="bulkRank"> Rank:</label>
+            <select class="form-control" ng-model="bsf.soldier.rank" id="bulkRank"
+                    ng-options="i.enum as i.name for i in Ranks">
+            </select>
           </div>
         </div>
+        <div class="col-xs-12 col-sm-6 col-md-1">
+          <div class="form-group">
+            <label for="bulkCount">Count:</label>
+            <input class="form-control" type="number" min="0" ng-model="bsf.soldier.count" id="bulkCount">
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="form-group">
+            <label for="bulkCountry">Country:</label>
+            <select class="form-control" ng-model="bsf.soldier.country" id="bulkCountry"
+                    ng-options="getCountryIndex(c) as c for c in Countries | orderBy:c"></select>
+          </div>
+        </div>
+        <div class="col-xs-2">
+          <div class="form-group">
+            <label for="bulkGender">Gender:</label>
+            <select class="form-control" ng-model="bsf.soldier.gender" id="bulkGender"
+                    ng-options="i.enum as i.name for i in Genders">
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-primary form-control" style="width: auto"
+                ng-click="bsf.addSoldiers()">
+
+          <span class="glyphicon glyphicon-plus"></span>
+          Add
+        </button>
       </div>
     </form>
   </div>

@@ -138,6 +138,10 @@
       return $scope.getNameFromEnum($scope.Items, itemEnum);
     };
 
+    $scope.getGenderName = function(genderEnum) {
+      return $scope.getNameFromEnum($scope.Genders, genderEnum);
+    };
+
     $scope.getFacilityOrTileName = function(facEnum) {
       var name = $scope.getNameFromEnum($scope.Facilities, facEnum);
       if (name != "")
@@ -146,8 +150,8 @@
         return $scope.getNameFromEnum($scope.Tiles, facEnum);
     };
 
-    $scope.getCountryName = function(countryEnum) {
-        return $scope.getNameFromEnum($scope.CouncilMembers, countryEnum);
+    $scope.getCountryName = function(countryIdx) {
+      return $scope.Countries[countryIdx+1];
     };
 
     $scope.getContinentName = function(continentEnum) {
@@ -263,7 +267,7 @@
       randombases: -1,
 
       soldiers: [],
-      bulkSoldiers: [0, 0, 0, 0, 0, 0, 0, 0],
+      bulkSoldiers: [],
       research: [],
       foundry: [],
       ots: [],

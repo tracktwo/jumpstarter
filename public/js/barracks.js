@@ -8,7 +8,7 @@
       var total = $scope.ini.soldiers.length;
 
       $scope.ini.bulkSoldiers.forEach( function(v) {
-        total += v;
+        total += v.count;
       });
 
       return total;
@@ -47,6 +47,10 @@
 
     this.delSoldier = function(idx) {
       $scope.ini.soldiers.splice(idx, 1);
+    };
+
+    this.removeBulkSoldiers = function(idx) {
+      $scope.ini.bulkSoldiers.splice(idx, 1);
     };
 
     this.printName = function (name) {
@@ -172,4 +176,24 @@
     };
   });
 
+  app.controller('BulkSoldierForm', function ($scope) {
+    this.soldier = {};
+
+    this.soldier = {
+      rank: "PFC",
+      country: -1,
+      gender: "eGender_None",
+      count: 1
+    };
+
+    this.addSoldiers = function() {
+      $scope.ini.bulkSoldiers.push(angular.copy(this.soldier));
+      this.soldier.rank = "PFC";
+      this.soldier.country = -1;
+      this.soldier.gender = "eGender_None";
+      this.soldier.count = 1;
+    }
+
+
+  });
 })();
