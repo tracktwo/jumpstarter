@@ -134,9 +134,17 @@ var buildBarracks = function(jstart) {
 
   // And add the bulk soldiers
   for (i = 0; i < jstart.bulkSoldiers.length; ++i) {
-    if (jstart.bulkSoldiers[i] > 0) {
-      str += "blanksoldier=(iRank=" + i + ", iCount=" + jstart.bulkSoldiers[i] + ")\n";
+    var bulk = jstart.bulkSoldiers[i];
+    str += "blanksoldier=(iRank=" + bulk.rank + ", iCount=" + bulk.count;
+    if (bulk.country != -1) {
+      str += ", iCountry=" + bulk.country;
     }
+
+    if (bulk.gender != 'eGender_None') {
+      str += ", iGender=" + bulk.gender;
+    }
+
+    str +=")\n";
   }
 
   str += "\n";

@@ -180,7 +180,7 @@
     this.soldier = {};
 
     this.soldier = {
-      rank: "PFC",
+      rank: "eRank_Rookie",
       country: -1,
       gender: "eGender_None",
       count: 1
@@ -188,7 +188,7 @@
 
     this.addSoldiers = function() {
       $scope.ini.bulkSoldiers.push(angular.copy(this.soldier));
-      this.soldier.rank = "PFC";
+      this.soldier.rank = "eRank_Rookie";
       this.soldier.country = -1;
       this.soldier.gender = "eGender_None";
       this.soldier.count = 1;
