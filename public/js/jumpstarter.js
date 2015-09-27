@@ -341,7 +341,7 @@
         list: "=",
         opts: "=",
         order: "@",
-        render: "&"
+        render: "&",
       },
       link: function($scope, element, attrs) {
         $scope.currentItem = "";
@@ -359,8 +359,13 @@
           return item == "" || $scope.list.indexOf(item) != -1;
         };
 
+        // Given a value in the list of options (a name/enum object) 
+        // filter out any enums already present in list.
         $scope.removePresent = function(value) {
-          return $scope.list.indexOf(value.name) == -1;
+            var v = $scope.list.filter(function(v) {
+                return v === value.enum;
+            }).length == 0;
+            return v;
         }
       },
       templateUrl: 'select-list-panel.html'
