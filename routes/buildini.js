@@ -120,7 +120,7 @@ var buildBarracks = function(jstart) {
 
     str += s.bonusAttrib ? ", bAttribBonus=true" : ", bAttribBonus=false";
 
-    if (s.country != "") {
+    if (s.country != -1) {
       str += addComponent(s.country, "iCountry", -1, true, false);
     }
 

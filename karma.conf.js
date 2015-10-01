@@ -1,5 +1,5 @@
 // Karma configuration
-// Generated on Mon Sep 28 2015 22:08:42 GMT-0700 (Pacific Daylight Time)
+// Generated on Tue Sep 29 2015 18:51:09 GMT-0700 (PDT)
 
 module.exports = function(config) {
   config.set({
@@ -18,7 +18,6 @@ module.exports = function(config) {
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'util/*.js',
-      //'public/js/*.js',
       'test/*.js'
     ],
 
@@ -26,10 +25,6 @@ module.exports = function(config) {
     // list of files to exclude
     exclude: [
     ],
-
-    client: {
-        captureConsole: true
-    },
 
 
     // preprocess matching files before serving them to the browser
@@ -54,7 +49,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_DEBUG,
+    logLevel: config.LOG_INFO,
 
 
     // enable / disable watching file and executing tests whenever any file changes
