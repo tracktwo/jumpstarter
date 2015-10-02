@@ -282,6 +282,12 @@
       airforce: []
     };
 
+    $scope.showDateWarning = function() {
+        var diff = (new Date($scope.ini.startDate) - new Date("2016-03-01"));
+        return $scope.ini.startDate != "" &&
+                diff < 0;
+    }
+
     $scope.ini.countries.eCountry_Canada = {panic: 0, satellite:false, alienbase:false};
     $scope.ini.countries.eCountry_USA = {panic: 0, satellite:false, alienbase:false};
     $scope.ini.countries.eCountry_Mexico = {panic: 0, satellite:false, alienbase:false};
