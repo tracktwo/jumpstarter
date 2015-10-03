@@ -66,21 +66,24 @@ Lexer.prototype.next = function() {
     // Handle quoted strings.
     if (c === '"') {
         return this._stringLiteral();
+    } else {
+        return this._doRegexMatch();
     }
     // Handle numbers
-    else if (c >= '0' && c <= '9') {
+    /*else if ((c >= '0' && c <= '9') || c === '-') {
         return this._number();
     }
     // Handle bool literals
     // Identifier or keyword (bool literals are the only keywords)
-    else if ((c >= 'a' && c <= 'z')  || (c >= 'A' && c <= 'Z') || c === '_') {
+    else if ((c >= 'a' && c <= 'z')  || 
+                (c >= 'A' && c <= 'Z') || c === '_') {
         return this._identifier();
     }
     else {
         // Unknown token
         this.log("Uknown token '" + c + "' at (" + this.line + "," + this.col + ")");
         return { name: 'ERROR', value: 'c', pos: this._makePos(1) };
-    }
+    }*/
 }
 
 Lexer.prototype._makePos = function(len) {
@@ -88,6 +91,66 @@ Lexer.prototype._makePos = function(len) {
     this.pos += len;
     this.col += len;
     return pos;
+}
+
+Lexer.prototype._makeToken = function(lexeme, valueme, count) {
+    return { name: lexeme, value: valueme, pos: this._makePos(count) };
+}
+
+Lexer.prototype._doRegexMatch = function() {
+    var str = this.buf.substring(this.pos);
+    if (str.match(/^true($|\W)/)) {
+        return this._makeToken('BOOL', true, this.line, this.col, 4);
+    }
+    else if (str.match(/^false($|\W)/)) {
+        return this._makeToken('BOOL', false, this.line, this.col, 4);
+    }
+
+    // Check for float literals
+    var found = str.match(/\d+\.\d+/);
+    if (found) {
+        console.log(found);
+        return this._makeToken('FLOAT', found[0], found[0].length);
+    }
+
+    // Check for hex integer literals: match zero or more hex digits
+    // so we can error on no hex digits
+    found = str.match(/(-)?0[Xx]([\dabcdefABCDEF]*)/);
+    if (found) {
+        console.log(found);
+        var value = parseInt(found[2], 16);
+        if (found[1] != undefined) {
+            value *= -1;
+        }
+        if (found[2].length == 0) {
+            return this._makeToken('ERROR', found[0], found[0].length);
+        }
+        return this._makeToken('INTEGER', value, found[0].length);
+    }
+
+    // Check for decimal integer literals
+    found = str.match(/(-)?(\d+)/);
+    console.log(found);
+    if (found) {
+        console.log(found);
+        var value = parseInt(found[2]);
+        if (found[1] != undefined) {
+            value *= -1;
+        }
+        return this._makeToken('INTEGER', value, found[0].length);
+    }
+
+    // Check for regular identifiers
+    found = str.match(/[A-Za-z_]\w*/);
+    if (found) {
+        console.log(found);
+        return this._makeToken('IDENTIFIER', found[0], found[0].length);
+    }
+    else {
+        // Unknown token
+        console.log("Uknown token '" + this.buf[this.pos] + "' at (" + this.line + "," + this.col + ")");
+        return { name: 'ERROR', value: 'c', pos: this._makePos(1) };
+    }
 }
 
 Lexer.prototype._skip = function() {
@@ -132,7 +195,18 @@ Lexer.prototype._isIdStartChar = function(c) {
 }
 
 Lexer.prototype._isDigit = function(c) {
-    return (c >= '0' && c <= '9');
+    return (c >= '0' && c <= '9') || c === '.' || (c >= 'a' && c <= 'f') ||
+        (c >= 'A' && c <= 'F');
+}
+
+Lexer.prototype._readChar = function() {
+    var c = this.buf.charAt(this.pos);
+    this._consume();
+    return c;
+}
+
+Lexer.prototype._peekChar = function() {
+    return this.buf.charAt(this.pos);
 }
 
 // Lex a string literal
@@ -177,15 +251,11 @@ Lexer.prototype._stringLiteral = function() {
     return { name: 'STRING', value: str, pos: {line: startLine, col: startCol} };
 };
 
-// Lex an identifier or literal
-Lexer.prototype._identifier = function() {
+Lexer.prototype._readWhile = function(pred) {
     var str = "";
-    var startLine = this.line;
-    var startCol = this.col;
-
     while (this.pos < this.buflen) {
         var c = this.buf.charAt(this.pos);
-        if (!this._isIdChar(c)) {
+        if (!pred.call(this, c)) {
             break;
         }
         else {
@@ -193,7 +263,68 @@ Lexer.prototype._identifier = function() {
             this._consume();
         }
     }
-    
+    return str;
+}
+
+Lexer.prototype._number = function() {
+    var str = "";
+    var startLine = this.line;
+    var startCol = this.col;
+    var negative = false;
+    var hex = false;
+ 
+    var c = this._readChar();
+    if (c === '-') {
+        //Looks like a negative value.
+        str += c;
+        c = this._readChar();
+        
+        if (!this._isDigit(c)) {
+            // Oops, - is not a number.
+            return { name: 'ERROR', val: '-', pos:{line:this.startLine, col:this.startCol} };
+        }
+    }
+    if (c === '0') {
+        var nextChar = this._peekChar();
+        if (nextChar == 'x' || nextChar == 'X') {
+            // Hex number
+            hex = true;
+            this._consume();
+        } else {
+            // Not a hex number. Add the '0' we consumed
+            str += c;
+        }
+    }
+    else {
+        str += c;
+    }
+        
+    str += this._readWhile(this._isDigit);
+
+    // If we have a hex number we should have at least one character
+    // after any negative.
+    if (hex) {
+        if (str === '' || str === '-') {
+            return { name: 'ERROR', val: str, pos:{line:this.startLine, col:this.startCol} };
+        }
+    }
+
+    if (str.indexOf(".") != -1) {
+    }
+    else {
+        var val = parseInt(str, hex ? 16 : 10);
+        return {name:'INTEGER', value:val, pos:{line:startLine, col:startCol} };
+    }
+
+}
+
+// Lex an identifier or literal
+Lexer.prototype._identifier = function() {
+    var startLine = this.line;
+    var startCol = this.col;
+
+    var str = this._readWhile(this._isIdChar);
+
     if (str === 'true') {
         return { name: 'BOOL', value: true, pos: {line: startLine, col: startCol} };
     } else if (str === 'false') {

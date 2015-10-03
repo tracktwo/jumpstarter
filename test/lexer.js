@@ -60,19 +60,27 @@ describe('Lexer', function() {
         expect(tok.value).toEqual('"ugh"\t\n\\sigh');
     });
 
-    it('parses true/false identifiers', function() {
+    it('parses true keyword', function() {
         lexer.init('true');
         var tok = lexer.next();
         expect(tok.name).toEqual('BOOL');
         expect(tok.value).toEqual(true);
     });
 
-    it('parses true/false identifiers', function() {
+    it('parses false keyword', function() {
         lexer.init('false');
         var tok = lexer.next();
         expect(tok.name).toEqual('BOOL');
         expect(tok.value).toEqual(false);
     });
+
+    it('doesn\'t consider an id starting with true to be a literal', 
+        function() {
+            lexer.init('truer');
+            var tok = lexer.next();
+            expect(tok.name).toEqual('IDENTIFIER');
+            expect(tok.value).toEqual('truer');
+        });
 
     it('parses identifiers', function() {
         lexer.init('_someId');
@@ -90,5 +98,53 @@ describe('Lexer', function() {
         expect(lexer.next().name).toEqual('EQUALS');
         expect(lexer.next().name).toEqual('COMMA');
     });
+
+    it('parses simple integers', function() {
+        lexer.init('123');
+        var tok = lexer.next();
+        expect(tok.name).toEqual('INTEGER');
+        expect(tok.value).toEqual(123);
+    });
+
+    it('parses negative numbers', function() {
+        lexer.init('-3');
+        var tok = lexer.next();
+        expect(tok.name).toEqual('INTEGER');
+        expect(tok.value).toEqual(-3);
+    });
+
+    it('parses hex numbers', function() {
+            lexer.init('0xc');
+            var tok = lexer.next();
+            expect(tok.name).toEqual('INTEGER');
+            expect(tok.value).toEqual(12);
+            });
+
+    it('handles bad negative numbers', function() {
+        lexer.init('-');
+        var tok = lexer.next();
+        expect(tok.name).toEqual('ERROR');
+    });
+
+    it ('handles bad hex numbers', function() {
+        lexer.init('0x');
+        var tok = lexer.next();
+        expect(tok.name).toEqual('ERROR');
+    });
+
+    it('handles float literals', function() {
+        lexer.init( '1.0');
+        var tok = lexer.next();
+        expect(tok.name).toEqual('FLOAT');
+        expect(tok.value).toEqual('1.0');
+    });
+
+    it ('splits float literals', function() {
+        lexer.init('1.0.2');
+        var tok = lexer.next();
+        expect(tok.name).toEqual('FLOAT');
+        expect(tok.value).toEqual('1.0');
+    });
+        
 });
         
