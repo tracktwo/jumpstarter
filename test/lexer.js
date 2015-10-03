@@ -145,6 +145,26 @@ describe('Lexer', function() {
         expect(tok.name).toEqual('FLOAT');
         expect(tok.value).toEqual('1.0');
     });
+
+    it('handles a simple directive', function() {
+        lexer.init('foo=(strName="str",iVal=3,bFlag=false)');
+        expect(lexer.next().name).toEqual('IDENTIFIER');
+        expect(lexer.next().name).toEqual('EQUALS');
+        expect(lexer.next().name).toEqual('LPAREN');
+        expect(lexer.next().name).toEqual('IDENTIFIER');
+        expect(lexer.next().name).toEqual('EQUALS');
+        expect(lexer.next().name).toEqual('STRING');
+        expect(lexer.next().name).toEqual('COMMA');
+        expect(lexer.next().name).toEqual('IDENTIFIER');
+        expect(lexer.next().name).toEqual('EQUALS');
+        expect(lexer.next().name).toEqual('INTEGER');
+        expect(lexer.next().name).toEqual('COMMA');
+        expect(lexer.next().name).toEqual('IDENTIFIER');
+        expect(lexer.next().name).toEqual('EQUALS');
+        expect(lexer.next().name).toEqual('BOOL');
+        expect(lexer.next().name).toEqual('RPAREN');
+        expect(lexer.next()).toEqual(null);
+    });
         
 });
         

@@ -100,24 +100,22 @@ Lexer.prototype._makeToken = function(lexeme, valueme, count) {
 Lexer.prototype._doRegexMatch = function() {
     var str = this.buf.substring(this.pos);
     if (str.match(/^true($|\W)/)) {
-        return this._makeToken('BOOL', true, this.line, this.col, 4);
+        return this._makeToken('BOOL', true, 4);
     }
     else if (str.match(/^false($|\W)/)) {
-        return this._makeToken('BOOL', false, this.line, this.col, 4);
+        return this._makeToken('BOOL', false, 5);
     }
 
     // Check for float literals
-    var found = str.match(/\d+\.\d+/);
+    var found = str.match(/^\d+\.\d+/);
     if (found) {
-        console.log(found);
         return this._makeToken('FLOAT', found[0], found[0].length);
     }
 
     // Check for hex integer literals: match zero or more hex digits
     // so we can error on no hex digits
-    found = str.match(/(-)?0[Xx]([\dabcdefABCDEF]*)/);
+    found = str.match(/^(-)?0[Xx]([\dabcdefABCDEF]*)/);
     if (found) {
-        console.log(found);
         var value = parseInt(found[2], 16);
         if (found[1] != undefined) {
             value *= -1;
@@ -129,10 +127,8 @@ Lexer.prototype._doRegexMatch = function() {
     }
 
     // Check for decimal integer literals
-    found = str.match(/(-)?(\d+)/);
-    console.log(found);
+    found = str.match(/^(-)?(\d+)/);
     if (found) {
-        console.log(found);
         var value = parseInt(found[2]);
         if (found[1] != undefined) {
             value *= -1;
@@ -141,9 +137,8 @@ Lexer.prototype._doRegexMatch = function() {
     }
 
     // Check for regular identifiers
-    found = str.match(/[A-Za-z_]\w*/);
+    found = str.match(/^[A-Za-z_]\w*/);
     if (found) {
-        console.log(found);
         return this._makeToken('IDENTIFIER', found[0], found[0].length);
     }
     else {
