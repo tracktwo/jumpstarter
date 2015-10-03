@@ -12,7 +12,7 @@
 // } 
 // 
 // token-lexeme is one of:
-// LPAREN, RPAREN, LBRACK, RBRACK, COMMA, EQUALS, STRING, INTEGER, FLOAT, BOOL,
+// LPAREN, RPAREN, LBRACK, RBRACK, COMMA, EQUALS, DOT, STRING, INTEGER, FLOAT, BOOL,
 // IDENTIFIER, ERROR
 //
 // token-value is the value, based on the lexeme:
@@ -46,7 +46,8 @@ Lexer.prototype.init = function(str, log) {
         '[': 'LBRACK',
         ']': 'RBRACK',
         '=': 'EQUALS',
-        ',': 'COMMA'
+        ',': 'COMMA',
+        '.': 'DOT'
     };
 };
 

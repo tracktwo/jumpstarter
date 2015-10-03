@@ -37,13 +37,36 @@
 //       ]
 //   }
 //
+// Section names are keys with javascript objects representing the contents:
+// 
+// [JumpStart.JumpStart]
+// START_DAY=1
+// START_MONTH=3
+// START_YEAR=2016
+//
+//   {
+//      '[JumpStart.JumpStart]': {
+//          'START_DAY': 1,
+//          'START_MONTH': 3,
+//          'START_YEAR': 2016
+//       }
+//   }
+//
 //
 // The grammar is as follows:
 //
 // ini-file: directive-list
 //
-// directive-list: directive directive-list
+// directive-list: section-or-directive directive-list
 //               | <empty>
+//
+// section-or-directive: directive
+//                     | section
+//
+// section: [ section-name ]
+//
+// section-name: identifier
+//             | identifier . section-name
 //
 // directive: IDENTIFIER = value
 //
@@ -56,6 +79,9 @@
 //
 // complex-value: directive , complex-value
 //                  | <empty>
+//
+// section-name: IDENTIFIER 
+//             | IDENTIFIER . section-name
 
 var Parser = function() {
     this.lexer = null;
@@ -69,6 +95,7 @@ Parser.prototype.init = function(lex, log) {
 
 Parser.prototype.parse = function() {
     var ini = {};
+    var section = null;
     do {
         var tok = this.lexer.next();
 
@@ -77,30 +104,47 @@ Parser.prototype.parse = function() {
             return ini;
         }
 
-        // An INI is just a list of directives. So look for an identifier that begins a directive.
-        if (tok.name == 'IDENTIFIER') {
+        // An INI is just a list of directives or sections. So look for an identifier or '['.
+        if (tok.name === 'LBRACK') {
+            // Parse a section
+            sec = this._Section(tok);
+            if (ini.hasOwnProperty(sec)) {
+                // this section already exists, just set the current section to this one.
+                section = ini[sec];
+            } else {
+                // A new section.
+                ini[sec] = {};
+                section = ini[sec];
+            }
+        }
+        else if (tok.name == 'IDENTIFIER') {
             var dir = this._Directive(tok);
             if (dir != null) {
-                // We have a valid directive. See if we've already seen
-                // this key.
-                if (ini.hasOwnProperty(dir.key)) {
-                    // Yep, this has gotta be a dynamic array.
-                    if (ini[dir.key].constructor === Array) {
-                        // Yep, just this new entry
-                        ini[dir.key].push(dir.value);
-                    } else {
-                        // Create a new array with the old value and the
-                        // new one.
-                        var arr = [ ini[dir.key], dir.value ];
-                        ini[dir.key] = arr;
-                    }
+                if (section == null) {
+                    // We aren't in a section
+                    this._error("Directive not inside a section");
                 } else {
-                    // This is a brand new property.
-                    ini[dir.key] = dir.value;
+                    // We have a valid directive. See if we've already seen
+                    // this key.
+                    if (section.hasOwnProperty(dir.key)) {
+                        // Yep, this has gotta be a dynamic array.
+                        if (section[dir.key].constructor === Array) {
+                            // Yep, just this new entry
+                            section[dir.key].push(dir.value);
+                        } else {
+                            // Create a new array with the old value and the
+                            // new one.
+                            var arr = [ section[dir.key], dir.value ];
+                            section[dir.key] = arr;
+                        }
+                    } else {
+                        // This is a brand new property.
+                        section[dir.key] = dir.value;
+                    }
                 }
             }
         } else {
-            this._error(tok.pos, "Syntax error: expected <identifier> but got " + tok.name + "\n");
+            this._error(tok.pos, "Syntax error: expected <identifier> or '[' but got " + tok.name + "\n");
         }
     } while (true);
 
@@ -117,7 +161,37 @@ Parser.prototype._error = function(pos, err) {
     ++this.errors;
 }
 
-// Parse a directive: IDENTIFIER = value
+// Parse a section [ section-name ]
+Parser.prototype._Section = function(tok) {
+    var sectionName = "[";
+    var tok = this.lexer.next();
+
+    do {
+        if (tok.name === 'IDENTIFIER') {
+            sectionName += tok.value;
+        } else {
+            this._error("Syntax error: expected identifier");
+            return null; 
+        }
+    
+        tok = this.lexer.next();
+        if (tok.name === 'RBRACK') {
+            // finished the section
+            sectionName += ']';
+            return sectionName;
+        }
+        else if (tok.name != 'DOT') {
+            // Not a . or ], syntax error.
+            this._error("Syntax error: expected '.' or ']' in a section name");
+            return null;
+        }
+        sectionName += '.';
+        // Got a dot. Read the next component and loop
+        tok = this.lexer.next();
+    } while(true);
+}
+
+// Parse a directive: IDENTIFIER = value or [ section-name ]
 Parser.prototype._Directive = function(tok) {
     // The next token needs to be an equals
     var next = this.lexer.next();
