@@ -4,6 +4,9 @@ var router = express.Router();
 
 var JumpStart = mongoose.model('JumpStart');
 
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+
 var buildHeader = function(type) {
   return ";\n; === " + type + " ===\n;\n";
 };
@@ -253,8 +256,7 @@ var convertToIni = function(jstart) {
 // POST / : Convert a JSON JumpStart description into
 // a .INI file. Does not require authentication, does not load
 // or store any database info.
-router.post('/', function(req, res, next) {
-  console.log(req.body);
+router.post('/', jsonParser, function(req, res, next) {
   var ini = convertToIni(req.body);
   res.status(200);
   res.set('Content-Type', 'text/plain');

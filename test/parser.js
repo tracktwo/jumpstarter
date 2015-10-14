@@ -14,21 +14,18 @@ describe('Parser', function() {
                 'FOO': 5
             }
         };
-        parser.init(lex, log);
+        parser.init(lex, function(v) { log += v; });
         var ini = parser.parse();
         expect(parser.errors).toEqual(0);
-        expect(parser.log).toEqual("");
         expect(ini).toEqual(expectedIni);
     });
 
     it('handles dynamic arrays of simple directives', function() {
         var lex = new Lexer();
         lex.init('[JumpStart.JumpStart]\nFOO=5\nFOO=6\nFOO=7');
-        var log = "";
-        parser.init(lex, log);
+        parser.init(lex);
         var ini = parser.parse();
         expect(parser.errors).toEqual(0);
-        expect(parser.log).toEqual("");
         var expectedIni = {
             '[JumpStart.JumpStart]': {
                     FOO: [ 5, 6, 7 ] 
@@ -40,11 +37,9 @@ describe('Parser', function() {
     it('handles complex directives', function() {
         var lex = new Lexer();
         lex.init('[JumpStart.JumpStart]\nComplexType=(iValue=5,bFlag=false,strString="hello, world!",nestedObj=(iNested=1,fFloat=3.14))');
-        var log = "";
-        parser.init(lex, log);
+        parser.init(lex);
         var ini = parser.parse();
         expect(parser.errors).toEqual(0);
-        expect(parser.log).toEqual("");
         var expectedIni = {
             '[JumpStart.JumpStart]': {
                 ComplexType: {

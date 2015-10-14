@@ -1,6 +1,6 @@
 (function () {
   var app = angular.module('jumpstarter',
-    ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items', 'facilities', 'world', 'airforce']);
+    ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items', 'facilities', 'world', 'airforce', 'lr.upload']);
 
   // Services
   app.factory('auth', ['$http', '$window', function ($http, $window) {
@@ -129,6 +129,10 @@
       }
       return results[0].name;
     };
+
+    $scope.onIniUpload = function(response) {
+        console.log("Got " + response.data);
+    }
 
     $scope.getPerkName = function (perkEnum) {
       return $scope.getNameFromEnum($scope.Perks, perkEnum);

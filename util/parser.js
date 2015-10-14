@@ -82,18 +82,23 @@
 //
 // section-name: IDENTIFIER 
 //             | IDENTIFIER . section-name
+//
 
 var Parser = function() {
     this.lexer = null;
     this.errors = 0;
+    this.log = "";
 }
 
-Parser.prototype.init = function(lex, log) {
+Parser.prototype.init = function(lex,log) {
     this.lexer = lex;
-    this.log = log;
+    if (log != null) {
+        this.log = log;
+    }
 };
 
 Parser.prototype.parse = function() {
+    this.log += "Parser.parse()\n";
     var ini = {};
     var section = null;
     do {
@@ -101,6 +106,7 @@ Parser.prototype.parse = function() {
 
         if (tok == null) {
             // Finished parsing
+            this.log += "Parser complete\n";
             return ini;
         }
 
@@ -149,7 +155,6 @@ Parser.prototype.parse = function() {
     } while (true);
 
     if (this.errors === 0) {
-        console.log(ini);
         return ini;
     } else {
         return null;
@@ -157,7 +162,7 @@ Parser.prototype.parse = function() {
 };
 
 Parser.prototype._error = function(pos, err) {
-    this.log += "Error (" + pos.line + "," + pos.col + "): " + err;
+    this.log += "Error (" + pos.line + "," + pos.col + "): " + err + "\n";
     ++this.errors;
 }
 
@@ -250,3 +255,4 @@ Parser.prototype._ComplexValue = function() {
 }
 
 
+module.exports = Parser;

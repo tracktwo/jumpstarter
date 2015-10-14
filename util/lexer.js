@@ -29,16 +29,18 @@ var Lexer = function() {
     this.line = 1;
     this.buf = null;
     this.buflen = 0;
-    this.log = console.log;
+    this.log = "";
 }
 
-Lexer.prototype.init = function(str, log) {
+Lexer.prototype.init = function(str,log) {
     this.pos = 0;
     this.line = 1;
     this.col = 1;
     this.buf = str;
     this.buflen = str.length;
-    this.log = log;
+    if (log != null) {
+        this.log = log;
+    }
 
     this.optable = { 
         '(': 'LPAREN',
@@ -54,6 +56,7 @@ Lexer.prototype.init = function(str, log) {
 Lexer.prototype.next = function() {
     this._skip();
     if (this.pos >= this.buflen) { 
+        this.log += "Lex: EOF\n";
         return null;
     }
 
@@ -61,7 +64,7 @@ Lexer.prototype.next = function() {
 
     if (this.optable.hasOwnProperty(c)) {
         // A simple one-character operand
-        return { name: this.optable[c], value: c, pos: this._makePos(1) };
+        return this._makeToken(this.optable[c], c, 1);
     }
 
     // Handle quoted strings.
@@ -70,21 +73,6 @@ Lexer.prototype.next = function() {
     } else {
         return this._doRegexMatch();
     }
-    // Handle numbers
-    /*else if ((c >= '0' && c <= '9') || c === '-') {
-        return this._number();
-    }
-    // Handle bool literals
-    // Identifier or keyword (bool literals are the only keywords)
-    else if ((c >= 'a' && c <= 'z')  || 
-                (c >= 'A' && c <= 'Z') || c === '_') {
-        return this._identifier();
-    }
-    else {
-        // Unknown token
-        this.log("Uknown token '" + c + "' at (" + this.line + "," + this.col + ")");
-        return { name: 'ERROR', value: 'c', pos: this._makePos(1) };
-    }*/
 }
 
 Lexer.prototype._makePos = function(len) {
@@ -95,6 +83,7 @@ Lexer.prototype._makePos = function(len) {
 }
 
 Lexer.prototype._makeToken = function(lexeme, valueme, count) {
+    this.log += "Lex: " + lexeme + "\n";
     return { name: lexeme, value: valueme, pos: this._makePos(count) };
 }
 
@@ -144,7 +133,7 @@ Lexer.prototype._doRegexMatch = function() {
     }
     else {
         // Unknown token
-        console.log("Uknown token '" + this.buf[this.pos] + "' at (" + this.line + "," + this.col + ")");
+        console.log += "Uknown token '" + this.buf[this.pos] + "' at (" + this.line + "," + this.col + ")" + "\n";
         return { name: 'ERROR', value: 'c', pos: this._makePos(1) };
     }
 }
@@ -243,7 +232,7 @@ Lexer.prototype._stringLiteral = function() {
     }
 
     // Hit the end of the stream without a closing quote
-    this.log("Unterminated quote starting at (" + startLine + "," + startCol + ")");
+    this.log += "Unterminated quote starting at (" + startLine + "," + startCol + ")" + "\n";
     return { name: 'STRING', value: str, pos: {line: startLine, col: startCol} };
 };
 
@@ -277,6 +266,7 @@ Lexer.prototype._number = function() {
         
         if (!this._isDigit(c)) {
             // Oops, - is not a number.
+            this.log += "Lex error: expect a number to follow '-'\n";
             return { name: 'ERROR', val: '-', pos:{line:this.startLine, col:this.startCol} };
         }
     }
