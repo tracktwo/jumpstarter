@@ -130,8 +130,84 @@
       return results[0].name;
     };
 
+    $scope.ensureArray = function(v) {
+        if (!angular.isArray(v)) {
+            return [v];
+        } else { 
+            return v;
+        }
+    };
+
     $scope.onIniUpload = function(response) {
+        console.log(response);
         console.log("Got " + response.data);
+        var uploaded = response.data;
+        var basicProps = [
+         { key: "SLINGSHOT_START_DAYS", value: "slingShotDelay" },
+         { key: "EXALT_CLUE_COUNT", value: "exaltClues" },
+         { key: "ALIEN_RESEARCH", value: "alienResearch" },
+         { key: "ALIEN_RESOURCES", value: "alienResources" },
+         { key: "XCOM_THREAT", value: "xcomThreat" },
+         { key: "CREDITS", value: "credits" },
+         { key: "FRAGMENTS", value: "fragments" },
+         { key: "ALLOYS", value: "alloys" },
+         { key: "ELERIUM", value: "elerium" },
+         { key: "SCIENTISTS", value: "scientists" },
+         { key: "ENGINEERS", value: "engineers" },
+         { key: "MELD", value: "meld" },
+         { key: "RANDOM_BASES", value: "randombases" }
+        ];
+
+        $scope.resetIni();
+    
+        basicProps.forEach(function(elem,idx) {
+            if (uploaded.hasOwnProperty(elem.key) && !angular.isArray(uploaded[elem.key])) {
+                $scope.ini[elem.value] = uploaded[elem.key];
+            }
+        });
+
+        for (var k in uploaded) {
+            if (uploaded.hasOwnProperty(k)) {
+                var lc = k.toLowerCase();
+                if (lc === "airforce") {
+                    var af = $scope.ensureArray(uploaded[k]);
+                    af.forEach(function(elem,idx) {
+                        var ship = {};
+                        ship.kills = elem.iKills;
+                        ship.weapon = elem.iWeapon;
+                        ship.firestorm = elem.bFirestorm;
+                        ship.continent = elem.iContinent;
+                        $scope.ini.airforce.push(ship);
+                    });
+                } else if (lc === "paniclevel") {
+                    var pl = $scope.ensureArray(uploaded[k]);
+                    pl.forEach(function(elem, idx) {
+                        $scope.ini.countries[elem.iCountry].panic = elem.iAmount;
+                    });
+                } else if (lc === "satellite") {
+                    var sat = $scope.ensureArray(uploaded[k]);
+                    sat.forEach(function(elem, idx) {
+                        $scope.ini.countries[elem].satellite = true;
+                    });
+                } else if (lc === "alienbase") {
+                    var base = $scope.ensureArray(uploaded[k]);
+                    base.forEach(function(elem, idx) {
+                        $scope.ini.countries[elem].alienbase = true;
+                    });
+                } else if (lc === "facility") {
+                    var fac = $scope.ensureArray(uploaded[k]);
+                    fac.forEach(function(elem, idx) {
+                        $scope.ini.facilities[elem.Y - 1][elem.X] = elem.iType;
+                    });
+                } else if (lc === "tile") {
+                    var tiles = $scope.ensureArray(uploaded[k]);
+                    tiles.forEach(function(elem, idx) {
+                        $scope.ini.facilities[elem.Y - 1][elem.X] = elem.iType;
+                    });
+                }
+                        
+            }
+        }
     }
 
     $scope.getPerkName = function (perkEnum) {
@@ -252,62 +328,66 @@
         $scope.CouncilMembers = response.data;
     });
 
-    $scope.ini = {
-      title: "",
-      author: "",
-      startDate: "",
-      exaltClues: -1,
-      slingshotDelay: -1,
-      alienResearch: -1,
-      alienResources: -1,
-      xcomThreat: -1,
-      credits: -1,
-      fragments: -1,
-      alloys: -1,
-      elerium: -1,
-      scientists: -1,
-      engineers: -1,
-      meld: -1,
-      randombases: -1,
+    $scope.resetIni = function() {
+        $scope.ini = {
+          title: "",
+          author: "",
+          startDate: "",
+          exaltClues: -1,
+          slingshotDelay: -1,
+          alienResearch: -1,
+          alienResources: -1,
+          xcomThreat: -1,
+          credits: -1,
+          fragments: -1,
+          alloys: -1,
+          elerium: -1,
+          scientists: -1,
+          engineers: -1,
+          meld: -1,
+          randombases: -1,
 
-      soldiers: [],
-      bulkSoldiers: [],
-      research: [],
-      foundry: [],
-      ots: [],
-      items: [],
-      facilities: [
-        ["eFacility_None", "eFacility_None", "eFacility_SmallRadar", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
-        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"],
-        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"],
-        ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"]
-      ],
-      countries: {},
-      airforce: []
+          soldiers: [],
+          bulkSoldiers: [],
+          research: [],
+          foundry: [],
+          ots: [],
+          items: [],
+          facilities: [
+            ["eFacility_None", "eFacility_None", "eFacility_SmallRadar", "eFacility_AccessLift", "eFacility_None", "eFacility_None", "eFacility_None"],
+            ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"],
+            ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"],
+            ["eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None", "eFacility_None"]
+          ],
+          countries: {},
+          airforce: []
+        };
+
+        $scope.ini.countries.eCountry_Canada = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_USA = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Mexico = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Argentina = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Brazil = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Egypt = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Nigeria = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_SouthAfrica = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_UK = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_France = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Germany = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Russia = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_India = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_China = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Japan = {panic: 0, satellite:false, alienbase:false};
+        $scope.ini.countries.eCountry_Australia = {panic: 0, satellite:false, alienbase:false};
     };
+
+    $scope.resetIni();
 
     $scope.showDateWarning = function() {
         var diff = (new Date($scope.ini.startDate) - new Date("2016-03-01"));
         return $scope.ini.startDate != "" &&
                 diff < 0;
     }
-
-    $scope.ini.countries.eCountry_Canada = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_USA = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Mexico = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Argentina = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Brazil = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Egypt = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Nigeria = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_SouthAfrica = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_UK = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_France = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Germany = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Russia = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_India = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_China = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Japan = {panic: 0, satellite:false, alienbase:false};
-    $scope.ini.countries.eCountry_Australia = {panic: 0, satellite:false, alienbase:false};
 
     this.buildIni = function() {
      $http.post("/buildini", $scope.ini).then(function (response) {

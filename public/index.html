@@ -14,10 +14,10 @@
   <script src="js/facilities.js"></script>
   <script src="js/world.js"></script>
   <script src="js/airforce.js"></script>
-  <script src="js/angular-upload.min.js"></script>
+  <script src="upload/angular-upload.min.js"></script>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-  <link rel="stylesheet" href="btnUpload.min.css"/>
+  <link rel="stylesheet" href="upload/src/directives/btnUpload.min.css"/>
   <style type="text/css">
     .checkbox-inline {
       padding-top: 28px !important;
@@ -38,8 +38,10 @@
 <body>
 <div class="container" ng-controller="JumpStarterCtrl as ctrl">
   <h1>JumpStarter .INI Generator</h1>
-  <div class="btn btn-default pull-right" upload-button url="/parseini" on-success="onIniUpload(response)"><span class="glyphicon glyphicon-upload"></span>Upload .INI</div>
+  <div class="row">
+  <div class="btn btn-primary btn-upload" upload-button url="/parseini" param="inifile" on-success="onIniUpload(response)"><span class="glyphicon glyphicon-upload"></span>Upload .INI</div>
   <a class="btn btn-primary pull-right" ng-click="ctrl.buildIni()"><span class="glyphicon glyphicon-download"></span>Download .INI</a>
+  </div>
   <tabs>
     <pane title="Basics">
       <div ng-include="'basic-panel.html'"></div>

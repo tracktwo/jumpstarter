@@ -31,13 +31,13 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, '../node_modules/angular-upload')));
 app.use(passport.initialize());
 
 app.use('/', routes);
 app.use('/users', users);
 app.use('/buildini', buildini);
 app.use('/parseini', parseini);
+app.use('/upload', express.static(path.join(__dirname, 'node_modules/angular-upload')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,15 +1,18 @@
 var express = require('express')
+var multer = require('multer');
 var Lexer = require('../util/lexer');
 var Parser = require('../util/parser');
 var router = express.Router();
-var bodyParser = require('body-parser');
-var textParser = bodyParser.text({type: '*/*'});
+var storage = multer.memoryStorage();
+var upload = multer({storage: storage});
 
-router.post('/', textParser, function(req, res, next) {
-    console.log(req.body);
+
+router.post('/', upload.single('inifile'), function(req, res, next) {
+    var data = req.file.buffer.toString('utf8');
+    console.log(data);
     var lex = new Lexer();
     var log = "";
-    lex.init(req.body, log);
+    lex.init(data, log);
     console.log(lex);
     var p = new Parser();
     p.init(lex, log);
