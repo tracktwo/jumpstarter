@@ -30,6 +30,7 @@ var Lexer = function() {
     this.buf = null;
     this.buflen = 0;
     this.log = "";
+    this.cache = [];
 }
 
 Lexer.prototype.init = function(str,log) {
@@ -38,6 +39,7 @@ Lexer.prototype.init = function(str,log) {
     this.col = 1;
     this.buf = str;
     this.buflen = str.length;
+    this.cache = [];
     if (log != null) {
         this.log = log;
     }
@@ -54,6 +56,21 @@ Lexer.prototype.init = function(str,log) {
 };
 
 Lexer.prototype.next = function() {
+    if (this.cache.length > 0) {
+        return this.cache.pop();
+    }
+    else {
+        return this._readToken();
+    }
+}
+
+Lexer.prototype.peek = function() {
+    var tok = this._readToken();
+    this.cache.push(tok);
+    return tok;
+}
+
+Lexer.prototype._readToken = function() {
     this._skip();
     if (this.pos >= this.buflen) { 
         this.log += "Lex: EOF\n";
@@ -74,6 +91,7 @@ Lexer.prototype.next = function() {
         return this._doRegexMatch();
     }
 }
+
 
 Lexer.prototype._makePos = function(len) {
     var pos = { line: this.line, col: this.col };
@@ -133,7 +151,7 @@ Lexer.prototype._doRegexMatch = function() {
     }
     else {
         // Unknown token
-        console.log += "Uknown token '" + this.buf[this.pos] + "' at (" + this.line + "," + this.col + ")" + "\n";
+        console.log ("Uknown token '" + this.buf[this.pos] + "' at (" + this.line + "," + this.col + ")" + "\n");
         return { name: 'ERROR', value: 'c', pos: this._makePos(1) };
     }
 }

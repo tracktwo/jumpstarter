@@ -77,8 +77,11 @@
 //      | IDENTIFIER   [e.g. for enum values]
 //      | ( complex-value )
 //
-// complex-value: directive , complex-value
+// complex-value: directive-or-value , complex-value
 //                  | <empty>
+//
+// directive-or-value: directive 
+//                   | value
 //
 // section-name: IDENTIFIER 
 //             | IDENTIFIER . section-name
@@ -163,6 +166,7 @@ Parser.prototype.parse = function() {
 
 Parser.prototype._error = function(pos, err) {
     this.log += "Error (" + pos.line + "," + pos.col + "): " + err + "\n";
+    console.log("Error (" + pos.line + "," + pos.col + "): " + err + "\n");
     ++this.errors;
 }
 
@@ -226,29 +230,42 @@ Parser.prototype._Directive = function(tok) {
     }
 }
 
-// complex-value ::= ( directive, directive-list )
+// complex-value ::=  directive-or-value, complex-value
+//                 |  empty
 Parser.prototype._ComplexValue = function() {
     var directives = {};
+    var arrayElems = [];
 
     do {
         var tok = this.lexer.next();
         if (tok.name != 'IDENTIFIER') {
-            this._error(tok.pos, "Expected an identifier");
-            return null;
+            directives.push(tok.value);
+        }
+        else {
+            var lookAhead = this.lexer.peek();
+            if (lookAhead.name === 'EQUALS') {
+                // we have 'identifier', '=', so this must be a directive.
+                var d = this._Directive(tok);
+                directives[d.key] = d.value;
+            } else {
+                // This must be an array-type.
+                arrayElems.push(tok.value);
+            }
         }
     
-        var d = this._Directive(tok);
-        directives[d.key] = d.value;
-
         tok = this.lexer.next();
         if (tok.name == 'RPAREN') {
             // we're done with this list
-            return directives;
+            if (arrayElems.length > 0) {
+                return arrayElems;
+            } else {
+                return directives;
+            }
         }
         else if (tok.name != 'COMMA') {
             // We should've seen a comma or a rparen.
             this._error(tok.pos, "Expected a ',' or ')' in a complex value");
-            return nullptr;
+            return null;
         }
         // Just continue on to read the next element
     } while (true);

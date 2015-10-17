@@ -111,7 +111,7 @@ var buildBarracks = function(jstart) {
     str += addComponent(s.gender, "iGender", 0, true, false);
     str += addComponent(s.psiRank, "iPsiRank", 0, true, false);
 
-    str += addComponent(s.firstName, "strfirstName", "", true, true);
+    str += addComponent(s.firstName, "strFirstName", "", true, true);
     str += addComponent(s.lastName, "strLastName", "", true, true);
     str += addComponent(s.nickName, "strNickName", "", true, true);
 

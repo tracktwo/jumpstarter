@@ -39,6 +39,7 @@ describe('Parser', function() {
         lex.init('[JumpStart.JumpStart]\nComplexType=(iValue=5,bFlag=false,strString="hello, world!",nestedObj=(iNested=1,fFloat=3.14))');
         parser.init(lex);
         var ini = parser.parse();
+        console.log(parser.log);
         expect(parser.errors).toEqual(0);
         var expectedIni = {
             '[JumpStart.JumpStart]': {
@@ -51,6 +52,20 @@ describe('Parser', function() {
                         fFloat: "3.14"
                     }
                 }
+            }
+        };
+        expect(ini).toEqual(expectedIni);
+    });
+
+    it('handles an array of identifiers', function() {
+        var lex = new Lexer();
+        lex.init('[JumpStart.JumpStart]\nSomeArray=(eVal1,eVal2,eVal3)');
+        parser.init(lex);
+        var ini = parser.parse();
+        expect(parser.errors).toEqual(0);
+        var expectedIni = {
+            '[JumpStart.JumpStart]': {
+                SomeArray: [ "eVal1", "eVal2", "eVal3" ]
             }
         };
         expect(ini).toEqual(expectedIni);

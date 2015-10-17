@@ -204,8 +204,63 @@
                     tiles.forEach(function(elem, idx) {
                         $scope.ini.facilities[elem.Y - 1][elem.X] = elem.iType;
                     });
-                }
+                } else if (lc === "soldier") {
+                    var soldiers = $scope.ensureArray(uploaded[k]);
+                    soldiers.forEach(function(elem, idx) {
+                        var s = {};
+                        var soldierProps = [
+                            { key: "iRank", value: "rank" },
+                            { key: "iClass", value: "class" },
+                            { key: "iGender", value: "gender" },
+                            { key: "iPsiRank", value: "psiRank" },
+                            { key: "strFirstName", value: "firstName" },
+                            { key: "strLastName", value: "lastName" },
+                            { key: "strNickName", value: "nickName" },
+                            { key: "iHP", value: "hp" },
+                            { key: "iAim", value: "aim" },
+                            { key: "iMobility", value: "mob" },
+                            { key: "iWill", value: "will" },
+                            { key: "iDefense", value: "defense" },
+                            { key: "bAttribBonus", value: "bonusAttrib" },
+                            { key: "iCountry", value: "country" },
+                        ];
+
+                        soldierProps.forEach(function(e,i) { 
+                            if (elem.hasOwnProperty(e.key)) {
+                                s[e.value] = elem[e.key];
+                            }
+                        });
                         
+                        if (elem.hasOwnProperty("iPerk")) {
+                            var perks = $scope.ensureArray(elem.iPerk);
+                            s.extraPerks = [];
+                            s.classPerks = ["","","","","",""];
+                            s.psiPerks = ["","","","","",""];
+                            perks.forEach(function(e, i) {
+                                s.extraPerks.push(e);
+                            });
+                        }
+                        $scope.ini.soldiers.push(s);
+                    });
+                }
+                else if (lc === 'blanksoldier') {
+                    var bulk = $scope.ensureArray(uploaded[k]);
+                    var bulkProps = [
+                        { key: "iRank", value: "rank" },
+                        { key: "iCount", value: "count" },
+                        { key: "iCountry", value: "country" },
+                        { key: "iGender", value: "gender" }
+                    ];
+                    bulk.forEach(function(elem,idx) {
+                        var bs = {};
+                        bulkProps.forEach(function(e,i) {
+                            if (elem.hasOwnProperty(e.key)) {
+                                bs[e.value] = elem[e.key];
+                            }
+                        });
+                        $scope.ini.bulkSoldiers.push(bs);
+                    });
+                }
             }
         }
     }
