@@ -237,7 +237,31 @@
                             s.classPerks = ["","","","","",""];
                             s.psiPerks = ["","","","","",""];
                             perks.forEach(function(e, i) {
-                                s.extraPerks.push(e);
+                                var found = false;
+                                for (var r = 2; r < 6; ++r) {
+                                    for (var i = 0; i < 3; ++i) {
+                                        if (e === $scope.ClassPerks[$scope.getClassName(s.class)][$scope.Ranks[r].name][i]) {
+                                            s.classPerks[r-2] = e;
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (!found) {
+                                    for (r = 1; r <= s.psiRank; ++r) {
+                                        var psiRankName = $scope.getPsiRankName(r);
+                                        for (var i = 0; i < $scope.PsiPerks[psiRankName].length; ++i) {
+                                            if (e === $scope.PsiPerks[psiRankName][i]) {
+                                                s.psiPerks[r-1] = e;
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                if (!found) {
+                                    s.extraPerks.push(e);
+                                }
                             });
                         }
                         $scope.ini.soldiers.push(s);
@@ -320,6 +344,10 @@
         }
       }
       return -1;
+    };
+
+    $scope.getPsiRankName = function(e) {
+        return $scope.getNameFromEnum($scope.PsiRanks, e);
     };
 
     $scope.getPsiRankIndex = function(r) {
