@@ -57,7 +57,7 @@
 
 
 
-  app.controller('JumpStarterCtrl', ['$scope', '$http', function ($scope, $http) {
+  app.controller('JumpStarterCtrl', ['$scope', '$http', '$modal', function ($scope, $http, $modal) {
     $scope.Ranks = [
       { name: "PFC", enum: "eRank_Rookie" },
       { name: "SPEC", enum: "eRank_Squaddie" },
@@ -138,12 +138,19 @@
         }
     };
 
+    $scope.onIniFailed = function(response) {
+        var msg = response.data.replace(/\n/g,"<br>");
+        var failedDialog = $modal.open({
+            size: 'sm',
+            template: '<div class="modal-header"><h3 class="modal-title">Upload Failed</h3></div>' +
+                '<div class="modal-body"><p>The ini upload has failed with the following error:</p><p>' + msg + '</div>'
+                });
+    }
+
     $scope.onIniUpload = function(response) {
-        console.log(response);
-        console.log("Got " + response.data);
         var uploaded = response.data;
         var basicProps = [
-         { key: "SLINGSHOT_START_DAYS", value: "slingShotDelay" },
+         { key: "SLINGSHOT_START_DAYS", value: "slingshotDelay" },
          { key: "EXALT_CLUE_COUNT", value: "exaltClues" },
          { key: "ALIEN_RESEARCH", value: "alienResearch" },
          { key: "ALIEN_RESOURCES", value: "alienResources" },
@@ -165,7 +172,10 @@
                 $scope.ini[elem.value] = uploaded[elem.key];
             }
         });
-
+        
+        var startMonth = 3;
+        var startDay = 1;
+        var startYear = 2016;
         for (var k in uploaded) {
             if (uploaded.hasOwnProperty(k)) {
                 var lc = k.toLowerCase();
@@ -179,6 +189,12 @@
                         ship.continent = elem.iContinent;
                         $scope.ini.airforce.push(ship);
                     });
+                } else if (lc === "start_day") {
+                    startDay = uploaded[k];
+                } else if (lc === "start_month") {
+                    startMonth = uploaded[k];
+                } else if (lc === "start_year") {
+                    startYear = uploaded[k];
                 } else if (lc === "paniclevel") {
                     var pl = $scope.ensureArray(uploaded[k]);
                     pl.forEach(function(elem, idx) {
@@ -203,6 +219,27 @@
                     var tiles = $scope.ensureArray(uploaded[k]);
                     tiles.forEach(function(elem, idx) {
                         $scope.ini.facilities[elem.Y - 1][elem.X] = elem.iType;
+                    });
+                } else if (lc === "storage") {
+                    var stor = $scope.ensureArray(uploaded[k]);
+                    stor.forEach(function(elem,idx) {
+                        var it = { enum: elem.iType.toString(), count: elem.iCount };
+                        $scope.ini.items.push(it);
+                    });
+                } else if (lc === "research") {
+                    var res = $scope.ensureArray(uploaded[k]);
+                    res.forEach(function(elem) { 
+                        $scope.ini.research.push(elem);
+                    });
+                } else if (lc === "foundry") {
+                    var found = $scope.ensureArray(uploaded[k]);
+                    found.forEach(function(elem) {
+                        $scope.ini.foundry.push(elem);
+                    });
+                } else if (lc === "ots") {
+                    var o = $scope.ensureArray(uploaded[k]);
+                    o.forEach(function(elem) {
+                        $scope.ini.ots.push(elem);
                     });
                 } else if (lc === "soldier") {
                     var soldiers = $scope.ensureArray(uploaded[k]);
@@ -287,6 +324,7 @@
                 }
             }
         }
+        $scope.ini.startDate = new Date("" + startYear + "/" + startMonth + "/" + startDay);
     }
 
     $scope.getPerkName = function (perkEnum) {

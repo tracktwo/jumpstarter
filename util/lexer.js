@@ -33,16 +33,13 @@ var Lexer = function() {
     this.cache = [];
 }
 
-Lexer.prototype.init = function(str,log) {
+Lexer.prototype.init = function(str) {
     this.pos = 0;
     this.line = 1;
     this.col = 1;
     this.buf = str;
     this.buflen = str.length;
     this.cache = [];
-    if (log != null) {
-        this.log = log;
-    }
 
     this.optable = { 
         '(': 'LPAREN',
@@ -151,7 +148,6 @@ Lexer.prototype._doRegexMatch = function() {
     }
     else {
         // Unknown token
-        console.log ("Uknown token '" + this.buf[this.pos] + "' at (" + this.line + "," + this.col + ")" + "\n");
         return { name: 'ERROR', value: 'c', pos: this._makePos(1) };
     }
 }

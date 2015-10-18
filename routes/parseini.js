@@ -9,20 +9,19 @@ var upload = multer({storage: storage});
 
 router.post('/', upload.single('inifile'), function(req, res, next) {
     var data = req.file.buffer.toString('utf8');
-    console.log(data);
     var lex = new Lexer();
-    var log = "";
-    lex.init(data, log);
-    console.log(lex);
+    lex.init(data);
     var p = new Parser();
-    p.init(lex, log);
-    //console.log(p);
+    p.init(lex);
+    try {
     var ini = p.parse();
-    //var ini = null;
+    } catch(e) {
+        console.log("caught exception " + e + " " + e.stack + ":" + e.lineNumber);
+    }
     if (ini == null || p.errors > 0) {
-        res.status(200);
+        res.status(400);
         res.set('Content-Type', 'text/plain');
-        res.send("Error parsing ini: " + log);
+        res.send("Error parsing ini: " + p.log);
     } else {
         var jsKey = '[JumpStart.JumpStart]';
         // Make sure the ini is a jumpstart INI
@@ -31,7 +30,7 @@ router.post('/', upload.single('inifile'), function(req, res, next) {
             res.set('Content-Type', 'application/json');
             res.send(ini[jsKey]);
         } else {
-            res.status(200);
+            res.status(400);
             res.set('Content-Type', 'text/plain');
             res.send("INI is not a JumpStart .ini");
         }

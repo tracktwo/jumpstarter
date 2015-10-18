@@ -93,15 +93,11 @@ var Parser = function() {
     this.log = "";
 }
 
-Parser.prototype.init = function(lex,log) {
+Parser.prototype.init = function(lex) {
     this.lexer = lex;
-    if (log != null) {
-        this.log = log;
-    }
 };
 
 Parser.prototype.parse = function() {
-    this.log += "Parser.parse()\n";
     var ini = {};
     var section = null;
     do {
@@ -132,6 +128,7 @@ Parser.prototype.parse = function() {
                 if (section == null) {
                     // We aren't in a section
                     this._error("Directive not inside a section");
+                    return null;
                 } else {
                     // We have a valid directive. See if we've already seen
                     // this key.
@@ -153,7 +150,8 @@ Parser.prototype.parse = function() {
                 }
             }
         } else {
-            this._error(tok.pos, "Syntax error: expected <identifier> or '[' but got " + tok.name + "\n");
+            this._error(tok.pos, "Syntax error: expected {identifier} or '[' but got " + tok.name + "\n");
+            return null;
         }
     } while (true);
 
@@ -166,7 +164,6 @@ Parser.prototype.parse = function() {
 
 Parser.prototype._error = function(pos, err) {
     this.log += "Error (" + pos.line + "," + pos.col + "): " + err + "\n";
-    console.log("Error (" + pos.line + "," + pos.col + "): " + err + "\n");
     ++this.errors;
 }
 
@@ -239,7 +236,7 @@ Parser.prototype._ComplexValue = function() {
     do {
         var tok = this.lexer.next();
         if (tok.name != 'IDENTIFIER') {
-            directives.push(tok.value);
+            arrayElems.push(tok.value);
         }
         else {
             var lookAhead = this.lexer.peek();
