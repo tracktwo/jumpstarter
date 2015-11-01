@@ -104,6 +104,16 @@
     { "enum": "ePerk_CovertPockets", "name": "Field Surgeon" },
     { "enum": "ePerk_Dazed", "name": "Paramedic" },
     { "enum": "ePerk_Foundry_PistolIII", "name": "Tandem Warheads" },
-    { "enum": "ePerk_Foundry_MedikitII", "name": "Deadeye" }
+    { "enum": "ePerk_Foundry_MedikitII", "name": "Deadeye" },
+    { "enum": "ePerk_Medal_InternationalA", "name": "Legio Patria Nostra" },
+    { "enum": "ePerk_Foundry_AdvancedServomotors", "name": "Stay Frosty" },
+    { "enum": "ePerk_Medal_UrbanA", "name": "Semper Vigilans" },
+    { "enum": "ePerk_Overdrive", "name": "Fortiores Una" },
+    { "enum": "ePerk_Medal_TerraB", "name": "Into the Breach" },
+    { "enum": "ePerk_OTS_XP", "name": "So Shall You Fight" },
+    { "enum": "ePerk_Medal_InternationalB", "name": "Band of Warriors" },
+    { "enum": "ePerk_Medal_TerraA", "name": "Esprit de Corps" },
+    { "enum": "ePerk_Medal_CouncilA", "name": "So Others May Live" },
+    { "enum": "ePerk_ExpandedStorage", "name": "Combined Arms" }
 ]
 

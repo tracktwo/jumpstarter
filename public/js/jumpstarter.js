@@ -101,6 +101,15 @@
       { name: "Master", enum: 6 }
     ];
 
+    $scope.OfficerRanks = [
+        { name: "None", enum:0 },
+        { name: "Lieutenant", enum:1 },
+        { name: "Captain", enum:2 },
+        { name: "Major", enum:3 },
+        { name: "Colonel", enum:4 },
+        { name: "Field Cmdr", enum:5 }
+    ];
+
     $scope.Continents = [
       { enum: "eContinent_NorthAmerica", name: "North America" },
       { enum: "eContinent_SouthAmerica", name: "South America" },
@@ -146,6 +155,30 @@
                 '<div class="modal-body"><p>The ini upload has failed with the following error:</p><p>' + msg + '</div>'
                 });
     }
+
+    $scope.initSoldier = function() {
+      return {
+        firstName: "",
+        lastName: "",
+        nickName: "",
+        rank: $scope.Ranks[0].enum,
+        class: $scope.Classes[0].enum,
+        gender: $scope.Genders[0].enum,
+        psiRank: $scope.PsiRanks[0].enum,
+        officerRank: $scope.OfficerRanks[0].enum,
+        country: -1,
+        classPerks: ["", "", "", "", "", ""],
+        psiPerks: ["", "", "", "", "", ""],
+        officerPerks: ["", "", "", "", ""],
+        extraPerks: [],
+        hp: 0,
+        aim: 0,
+        will: 0,
+        mob: 0,
+        defense: 0,
+        bonusAttrib: true
+      };
+    };
 
     $scope.onIniUpload = function(response) {
         var uploaded = response.data;
@@ -244,12 +277,13 @@
                 } else if (lc === "soldier") {
                     var soldiers = $scope.ensureArray(uploaded[k]);
                     soldiers.forEach(function(elem, idx) {
-                        var s = {};
+                        var s = $scope.initSoldier();
                         var soldierProps = [
                             { key: "iRank", value: "rank" },
                             { key: "iClass", value: "class" },
                             { key: "iGender", value: "gender" },
                             { key: "iPsiRank", value: "psiRank" },
+                            { key: "iOfficerRank", value: "officerRank" },
                             { key: "strFirstName", value: "firstName" },
                             { key: "strLastName", value: "lastName" },
                             { key: "strNickName", value: "nickName" },
@@ -273,6 +307,7 @@
                             s.extraPerks = [];
                             s.classPerks = ["","","","","",""];
                             s.psiPerks = ["","","","","",""];
+                            s.officerPerks = ["","","","",""];
                             perks.forEach(function(e, i) {
                                 var found = false;
                                 for (var r = 2; r < 6; ++r) {
@@ -290,6 +325,18 @@
                                         for (var i = 0; i < $scope.PsiPerks[psiRankName].length; ++i) {
                                             if (e === $scope.PsiPerks[psiRankName][i]) {
                                                 s.psiPerks[r-1] = e;
+                                                found = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                }
+                                if (!found) {
+                                    for (r = 1; r <= s.officerRank; ++r) {
+                                        var officerRankName = $scope.getOfficerRankName(r);
+                                        for (var i = 0; i < $scope.OfficerPerks[officerRankName].length; ++i) {
+                                            if (e === $scope.OfficerPerks[officerRankName][i]) {
+                                                s.officerPerks[r-1] = e;
                                                 found = true;
                                                 break;
                                             }
@@ -388,6 +435,10 @@
         return $scope.getNameFromEnum($scope.PsiRanks, e);
     };
 
+    $scope.getOfficerRankName = function(e) {
+        return $scope.getNameFromEnum($scope.OfficerRanks, e);
+    };
+
     $scope.getPsiRankIndex = function(r) {
       for (var i = 0; i < $scope.PsiRanks.length; ++i) {
         if ($scope.PsiRanks[i].enum === r) {
@@ -395,6 +446,15 @@
         }
       }
       return -1;
+    };
+
+    $scope.getOfficerRankIndex = function(r) {
+        for (var i = 0; i < $scope.OfficerRanks.length; ++i) {
+            if ($scope.OfficerRanks[i].enum === r) {
+                return i;
+            }
+        }
+        return -1;
     };
 
     $scope.getCountryIndex = function(countryName) {
@@ -415,6 +475,10 @@
 
     $http.get("data/psi-perks.json").then(function (response) {
       $scope.PsiPerks = response.data;
+    });
+
+    $http.get("data/officer-perks.json").then(function (response) {
+        $scope.OfficerPerks = response.data;
     });
 
     $http.get("data/class-stats.json").then(function (response) {

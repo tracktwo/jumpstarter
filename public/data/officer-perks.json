@@ -1,0 +1,7 @@
+{
+    "Lieutenant": [ "ePerk_Medal_InternationalA", "ePerk_Foundry_AdvancedServomotors" ],
+    "Captain": [ "ePerk_Medal_UrbanA", "ePerk_Overdrive" ],
+    "Major": [ "ePerk_Medal_TerraB", "ePerk_OTS_XP" ],
+    "Colonel": [ "ePerk_Medal_InternationalB", "ePerk_Medal_TerraA" ],
+    "Field Cmdr": [ "ePerk_Medal_CouncilA", "ePerk_ExpandedStorage" ]
+}

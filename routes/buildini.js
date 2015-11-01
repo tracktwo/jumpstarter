@@ -89,6 +89,15 @@ var buildPerks = function(s) {
     }
   }
 
+  for (i = 0; i < 5; ++i) {
+      if (s.officerPerks[i] != "") {
+          if (str != "") {
+              str += ", ";
+          }
+          str += s.officerPerks[i];
+      }
+  }
+
   for (i = 0; i < s.extraPerks.length; ++i) {
     console.log(s.extraPerks[i]);
     if (str != "") {
@@ -110,6 +119,7 @@ var buildBarracks = function(jstart) {
 
     str += addComponent(s.gender, "iGender", 0, true, false);
     str += addComponent(s.psiRank, "iPsiRank", 0, true, false);
+    str += addComponent(s.officerRank, "iOfficerRank", 0, true, false);
 
     str += addComponent(s.firstName, "strFirstName", "", true, true);
     str += addComponent(s.lastName, "strLastName", "", true, true);

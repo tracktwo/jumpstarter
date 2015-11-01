@@ -68,25 +68,7 @@
     this.soldier = {};
 
     if (curSoldier == null) {
-      this.soldier = {
-        firstName: "",
-        lastName: "",
-        nickName: "",
-        rank: $scope.Ranks[0].enum,
-        class: $scope.Classes[0].enum,
-        gender: $scope.Genders[0].enum,
-        psiRank: $scope.PsiRanks[0].enum,
-        country: -1,
-        classPerks: ["", "", "", "", "", ""],
-        psiPerks: ["", "", "", "", "", ""],
-        extraPerks: [],
-        hp: 0,
-        aim: 0,
-        will: 0,
-        mob: 0,
-        defense: 0,
-        bonusAttrib: true
-      };
+        this.soldier = $scope.initSoldier();
     }
     else {
       angular.copy(curSoldier, this.soldier);
@@ -139,6 +121,11 @@
       return this.soldier.psiRank == $scope.PsiRanks[0] ||
         ($scope.getPsiRankIndex(this.soldier.psiRank) < $scope.getPsiRankIndex(rank));
         //($scope.PsiRanks.indexOf(this.soldier.psiRank) < $scope.PsiRanks.indexOf(rank));
+    };
+
+    this.isOfficerPerkDisabled = function(rank) {
+        return this.soldier.officerRank == $scope.OfficerRanks[0] ||
+        ($scope.getOfficerRankIndex(this.soldier.officerRank) < $scope.getOfficerRankIndex(rank));
     };
 
     this.addExtraPerk = function (prk) {
