@@ -76,7 +76,7 @@
       }
 
       var results = dataSet.filter(function (v) {
-        return v.enum === enumVal;
+        return v.enum == enumVal;
       });
       if (results.length == 0) {
         return "";
