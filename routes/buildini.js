@@ -1,8 +1,5 @@
 var express = require('express');
-var mongoose = require('mongoose');
 var router = express.Router();
-
-var JumpStart = mongoose.model('JumpStart');
 
 var bodyParser = require('body-parser');
 var jsonParser = bodyParser.json();

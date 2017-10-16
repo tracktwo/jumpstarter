@@ -2,61 +2,6 @@
   var app = angular.module('jumpstarter',
     ['ui.bootstrap', 'tabs', 'basic', 'barracks', 'research', 'items', 'facilities', 'world', 'airforce', 'lr.upload']);
 
-  // Services
-  app.factory('auth', ['$http', '$window', function ($http, $window) {
-    var auth = {};
-
-    auth.saveToken = function(token) {
-      $window.localStorage['jumpstarter-token'] = token;
-    };
-
-    auth.getToken = function(token) {
-      return $window.localStorage['jumpstarter-token'];
-    };
-
-    auth.getPayload = function(token) {
-      return JSON.parse($window.atob(token.split('.')[1]));
-    };
-
-    auth.isLoggedIn = function() {
-      var token = auth.getToken();
-      if (token) {
-        var payload = auth.getPayload(token);
-        return payload.exp > Date.now() / 1000;
-      } else {
-        return false;
-      }
-    };
-
-    auth.currentUser = function() {
-      if (auth.isLoggedIn()) {
-        var token = auth.getToken();
-        var payload = auth.getPayload(token);
-        return payload.username;
-      }
-    };
-
-    auth.register = function(user) {
-      return $http.post('/register', user).success(function(data) {
-        auth.saveToken(data.token);
-      });
-    };
-
-    auth.login = function(user) {
-      return $http.post('/login', user).success(function(data) {
-        auth.saveToken(data.token);
-      })
-    };
-
-    auth.logout = function(user) {
-      $window.localStorage.removeItem('jumpstarter-token');
-    };
-
-    return auth;
-  }]);
-
-
-
   app.controller('JumpStarterCtrl', ['$scope', '$http', '$modal', function ($scope, $http, $modal) {
     $scope.Ranks = [
       { name: "PFC", enum: "eRank_Rookie" },
