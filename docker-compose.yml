@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+    jumpstarter:
+        build: .
+        ports:
+            - "3001:3001"
+        restart: unless-stopped
+
+    nginx-proxy:
+        image: jwilder/nginx-proxy
+        ports:
+            - "80:80"
+        volumes:
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        restart: unless-stopped
+
